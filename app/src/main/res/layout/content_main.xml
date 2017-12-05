@@ -12,11 +12,12 @@
         android:id="@+id/viewpager_tab"
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:background="@color/colorPrimary"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:stl_clickable="true"
-        app:stl_defaultTabBackground="?attr/selectableItemBackground"
+        app:stl_defaultTabBackground="@color/colorPrimaryDark"
         app:stl_defaultTabTextAllCaps="true"
-        app:stl_defaultTabTextColor="#FC000000"
+        app:stl_defaultTabTextColor="#FFFFFF"
         app:stl_defaultTabTextHorizontalPadding="16dp"
         app:stl_defaultTabTextMinWidth="0dp"
         app:stl_defaultTabTextSize="12sp"
@@ -42,8 +43,8 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/viewpager_tab"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        android:layout_height="495dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintTop_toBottomOf="@+id/viewpager_tab" />
 
 </android.support.constraint.ConstraintLayout>
