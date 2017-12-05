@@ -22,9 +22,9 @@ import app.kimyeonjung.trendreader.data.info.FeedAdapter;
 import app.kimyeonjung.trendreader.data.info.FeedItem;
 import app.kimyeonjung.trendreader.data.info.FeedManager;
 
-public class AllFeed extends Fragment {
+public class FeedAll extends Fragment {
 
-    public AllFeed() {
+    public FeedAll() {
     }
 
 
