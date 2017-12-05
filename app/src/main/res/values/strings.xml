@@ -1,8 +1,13 @@
 <resources>
     <string name="app_name">TrendReader</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <!-- Drawer -->
+    <string name="navigation_drawer_open">메뉴 열기</string>
+    <string name="navigation_drawer_close">메뉴 닫기</string>
 
-    <string name="action_settings">Settings</string>
+    <!-- Menu -->
+    <string name="action_settings">설정</string>
+
+    <!-- Tab -->
+    <string name="title_feed_all">전체 피드</string>
 </resources>
