@@ -68,8 +68,8 @@ public class FeedManager {
                     feedItem.setBlogUrl(tempJson.getString("blog_url"));
 
                     // Content
-                    feedItem.setPostTitle(tempJson.getString("post_title").replaceAll("\n", ""));
-                    feedItem.setPostContent(tempJson.getString("post_content"));
+                    feedItem.setPostTitle(tempJson.getString("post_title").replaceAll("\n", "").trim());
+                    feedItem.setPostContent(tempJson.getString("post_content").trim());
                     feedItem.setPostUrl(tempJson.getString("post_url"));
                     feedItem.setUpdateAt(tempJson.getString("update_at"));
 
