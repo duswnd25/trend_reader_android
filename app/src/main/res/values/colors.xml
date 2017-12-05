@@ -3,4 +3,5 @@
     <color name="colorPrimary">#171717</color>
     <color name="colorPrimaryDark">#080808</color>
     <color name="colorAccent">#FFD740</color>
+    <color name="faviconBackground">#FFFFFF</color>
 </resources>

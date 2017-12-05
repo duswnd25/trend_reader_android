@@ -11,37 +11,47 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="@dimen/interval_4">
+        android:orientation="vertical">
 
-        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/feed_profile_image"
-            android:layout_width="@dimen/feed_image_size"
-            android:layout_height="@dimen/feed_image_size"
-            app:civ_border_color="#FF000000"
-            app:civ_border_width="2dp"
-            tools:src="@mipmap/ic_launcher_foreground" />
-
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/interval_8">
+            android:layout_height="@dimen/feed_background_image_height"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/feed_profile_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/ic_launcher_background" />
 
             <me.grantland.widget.AutofitTextView
                 android:id="@+id/feed_title"
                 style="@style/Base.TextAppearance.AppCompat.Title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
                 android:maxLines="1"
+                android:paddingEnd="@dimen/interval_4"
+                android:paddingStart="@dimen/interval_4"
+                app:sizeToFit="true"
                 tools:text="제목" />
+        </FrameLayout>
 
-            <me.grantland.widget.AutofitTextView
+        <LinearLayout
+            android:id="@+id/feed_description_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/interval_8">
+
+            <TextView
                 android:id="@+id/feed_description"
                 style="@style/Base.TextAppearance.AppCompat.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLines="4"
+                android:maxLines="10"
                 android:textColor="@android:color/darker_gray"
                 tools:text="내용" />
         </LinearLayout>

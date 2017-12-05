@@ -1,11 +1,14 @@
 package app.kimyeonjung.trendreader.ui;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,14 +38,18 @@ public class AllFeed extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
         final LinkedList<FeedItem> feedList = new LinkedList<>();
         final FeedAdapter feedAdapter = new FeedAdapter(getContext(), feedList);
 
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        StaggeredGridLayoutManager feedLayoutManager = new StaggeredGridLayoutManager(
+                prefs.getInt(getString(R.string.pref_feed_col_num), 1),
+                StaggeredGridLayoutManager.VERTICAL);
+        feedLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS);
 
         RecyclerView feedView = view.findViewById(R.id.fragment_recycler_view);
-        feedView.setHasFixedSize(false);
-        feedView.setLayoutManager(mLayoutManager);
+        feedView.setHasFixedSize(true);
+        feedView.setLayoutManager(feedLayoutManager);
         feedView.setAdapter(feedAdapter);
 
         new FeedManager().fetchFeed(Const.API_URL.ALL, result -> {

@@ -2,6 +2,7 @@ package app.kimyeonjung.trendreader.data.info;
 
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
+import android.support.v7.graphics.Palette;
 
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -38,7 +39,7 @@ public class FeedManager {
         @Override
         protected void onPostExecute(LinkedList<FeedItem> result) {
             super.onPostExecute(result);
-            Collections.sort(result, (f1, f2) -> f1.getUpdateAt().compareTo(f2.getUpdateAt()));
+            Collections.sort(result, (f1, f2) -> f2.getUpdateAt().compareTo(f1.getUpdateAt()));
             callback.done(result);
         }
 
@@ -67,7 +68,7 @@ public class FeedManager {
                     feedItem.setBlogUrl(tempJson.getString("blog_url"));
 
                     // Content
-                    feedItem.setPostTitle(tempJson.getString("post_title"));
+                    feedItem.setPostTitle(tempJson.getString("post_title").replaceAll("\n", ""));
                     feedItem.setPostContent(tempJson.getString("post_content"));
                     feedItem.setPostUrl(tempJson.getString("post_url"));
                     feedItem.setUpdateAt(tempJson.getString("update_at"));

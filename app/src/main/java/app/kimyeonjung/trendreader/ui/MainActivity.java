@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity
         ViewPager viewPager = findViewById(R.id.viewpager);
         viewPager.setAdapter(tabAdapter);
 
-        SmartTabLayout viewPagerTab = findViewById(R.id.viewpagertab);
+        SmartTabLayout viewPagerTab = findViewById(R.id.viewpager_tab);
         viewPagerTab.setViewPager(viewPager);
     }
 
