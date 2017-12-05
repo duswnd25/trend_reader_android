@@ -13,4 +13,5 @@
 
     <!-- PREFERENCE -->
     <string name="pref_feed_col_num">pref_feed_col_num</string>
+    <string name="pref_feed_palette_use">pref_feed_palette_use</string>
 </resources>
