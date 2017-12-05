@@ -25,10 +25,12 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
 
     private LinkedList<FeedItem> feedList = new LinkedList<>();
     private Context context;
+    private boolean isPaletteUse;
 
-    public FeedAdapter(Context context, LinkedList<FeedItem> feedList) {
+    public FeedAdapter(Context context, Boolean isPaletteUse, LinkedList<FeedItem> feedList) {
         this.context = context;
         this.feedList = feedList;
+        this.isPaletteUse = isPaletteUse;
     }
 
     @Override
@@ -53,12 +55,13 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
                     @Override
                     public void onResourceReady(Bitmap bitmap, GlideAnimation anim) {
                         super.onResourceReady(bitmap, anim);
-                        Palette palette = Palette.from(bitmap).generate();
-                        Palette.Swatch vibrantSwatch = palette.getVibrantSwatch();
-                        if (vibrantSwatch != null) {
-                            holder.title.setTextColor(vibrantSwatch.getTitleTextColor());
-                            holder.descriptionContainer.setBackgroundColor(vibrantSwatch.getRgb());
-                            holder.description.setTextColor(vibrantSwatch.getBodyTextColor());
+                        if (isPaletteUse) {
+                            Palette palette = Palette.from(bitmap).generate();
+                            Palette.Swatch vibrantSwatch = palette.getLightVibrantSwatch();
+                            if (vibrantSwatch != null) {
+                                holder.descriptionContainer.setBackgroundColor(vibrantSwatch.getRgb());
+                                holder.description.setTextColor(vibrantSwatch.getBodyTextColor());
+                            }
                         }
                     }
                 });

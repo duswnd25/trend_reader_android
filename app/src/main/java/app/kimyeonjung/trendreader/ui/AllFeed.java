@@ -40,7 +40,7 @@ public class AllFeed extends Fragment {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
         final LinkedList<FeedItem> feedList = new LinkedList<>();
-        final FeedAdapter feedAdapter = new FeedAdapter(getContext(), feedList);
+        final FeedAdapter feedAdapter = new FeedAdapter(getContext(), prefs.getBoolean(getString(R.string.pref_feed_palette_use), false), feedList);
 
         StaggeredGridLayoutManager feedLayoutManager = new StaggeredGridLayoutManager(
                 prefs.getInt(getString(R.string.pref_feed_col_num), 1),
@@ -48,9 +48,21 @@ public class AllFeed extends Fragment {
         feedLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS);
 
         RecyclerView feedView = view.findViewById(R.id.fragment_recycler_view);
+        feedView.setNestedScrollingEnabled(true);
         feedView.setHasFixedSize(true);
         feedView.setLayoutManager(feedLayoutManager);
         feedView.setAdapter(feedAdapter);
+        feedView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
 
         new FeedManager().fetchFeed(Const.API_URL.ALL, result -> {
             feedList.addAll(result);
