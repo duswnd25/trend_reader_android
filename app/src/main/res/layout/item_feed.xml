@@ -26,6 +26,13 @@
                 android:scaleType="centerCrop"
                 tools:src="@drawable/ic_launcher_background" />
 
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/shadow" />
+
             <me.grantland.widget.AutofitTextView
                 android:id="@+id/feed_title"
                 style="@style/Base.TextAppearance.AppCompat.Title"
@@ -35,6 +42,8 @@
                 android:maxLines="1"
                 android:paddingEnd="@dimen/interval_4"
                 android:paddingStart="@dimen/interval_4"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
                 app:sizeToFit="true"
                 tools:text="제목" />
         </FrameLayout>
