@@ -1,55 +1,96 @@
 package app.kimyeonjung.trendreader.ui;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.ContentLoadingProgressBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 
 import java.util.LinkedList;
 
 import app.kimyeonjung.trendreader.R;
 import app.kimyeonjung.trendreader.core.Const;
-import app.kimyeonjung.trendreader.data.info.FeedAdapter;
-import app.kimyeonjung.trendreader.data.info.FeedItem;
-import app.kimyeonjung.trendreader.data.info.FeedManager;
+import app.kimyeonjung.trendreader.data.feed.FeedAdapter;
+import app.kimyeonjung.trendreader.data.feed.FeedItem;
+import app.kimyeonjung.trendreader.data.feed.FeedManager;
 
 public class FeedTrend extends Fragment {
 
+    private Context context;
+    private LinkedList<FeedItem> feedList = new LinkedList<>();
+    private FeedAdapter feedAdapter;
+
     public FeedTrend() {
+
+        setHasOptionsMenu(true);
     }
 
+    @Override
+    public void onAttach(Context context) {
+
+        super.onAttach(context);
+        this.context = context;
+    }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
+        inflater.inflate(R.menu.feed_search, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         return inflater.inflate(R.layout.fragment_recycler, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
         super.onViewCreated(view, savedInstanceState);
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-        final LinkedList<FeedItem> feedList = new LinkedList<>();
-        final FeedAdapter feedAdapter = new FeedAdapter(getContext(), prefs.getBoolean(getString(R.string.pref_feed_palette_use), false), feedList);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        boolean isPaletteUse = prefs.getBoolean(getString(R.string.pref_feed_palette_use), false);
+        int staggerColSize = prefs.getInt(getString(R.string.pref_feed_col_num), 2);
 
-        StaggeredGridLayoutManager feedLayoutManager = new StaggeredGridLayoutManager(
-                prefs.getInt(getString(R.string.pref_feed_col_num), 1),
-                StaggeredGridLayoutManager.VERTICAL);
+        feedAdapter = new FeedAdapter(getContext(), isPaletteUse, feedList);
+
+        initView(view, staggerColSize);
+        initData(view);
+    }
+
+    private void initView(View view, int staggerColSize) {
+
+        // StaggerGridLayout
+        StaggeredGridLayoutManager feedLayoutManager = new StaggeredGridLayoutManager(staggerColSize, StaggeredGridLayoutManager.VERTICAL);
         feedLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS);
 
+        // RecyclerView
         RecyclerView feedView = view.findViewById(R.id.fragment_recycler_view);
         feedView.setNestedScrollingEnabled(true);
         feedView.setHasFixedSize(true);
         feedView.setLayoutManager(feedLayoutManager);
         feedView.setAdapter(feedAdapter);
+
+        // Scroll Change Listener
         feedView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -61,8 +102,14 @@ public class FeedTrend extends Fragment {
                 super.onScrolled(recyclerView, dx, dy);
             }
         });
+    }
 
+    private void initData(View view) {
+
+        ContentLoadingProgressBar progressBar = view.findViewById(R.id.fragment_recycler_progress);
+        progressBar.show();
         new FeedManager().fetchFeed(Const.API_URL.ALL, result -> {
+            progressBar.hide();
             feedList.addAll(result);
             feedAdapter.notifyDataSetChanged();
         });

@@ -10,6 +10,8 @@
 
     <!-- Tab -->
     <string name="title_feed_all">전체 피드</string>
+    <string name="title_feed_trend">트렌드</string>
+    <string name="title_feed_book_mark">북마크</string>
 
     <!-- PREFERENCE -->
     <string name="pref_feed_col_num">pref_feed_col_num</string>

@@ -52,9 +52,9 @@ public class MainActivity extends AppCompatActivity
     private void initTabView() {
         FragmentPagerItemAdapter tabAdapter = new FragmentPagerItemAdapter(
                 getSupportFragmentManager(), FragmentPagerItems.with(this)
-                .add(R.string.title_feed_all, FeedAll.class)
                 .add(R.string.title_feed_all, FeedSearch.class)
-                .add(R.string.title_feed_all, FeedTrend.class)
+                .add(R.string.title_feed_trend, FeedTrend.class)
+                .add(R.string.title_feed_book_mark, FeedBookMark.class)
                 .create());
 
         ViewPager viewPager = findViewById(R.id.viewpager);
@@ -74,9 +74,6 @@ public class MainActivity extends AppCompatActivity
                     break;
                 case 1:
                     icon.setImageDrawable(res.getDrawable(R.drawable.ic_search));
-                    break;
-                case 2:
-                    icon.setImageDrawable(res.getDrawable(R.drawable.ic_eye));
                     break;
                 default:
                     throw new IllegalStateException("Invalid position: " + position);
@@ -100,7 +97,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.feed_all, menu);
         return true;
     }
 

@@ -1,4 +1,4 @@
-package app.kimyeonjung.trendreader.data.info;
+package app.kimyeonjung.trendreader.data.feed;
 
 import java.util.Calendar;
 import java.util.Date;

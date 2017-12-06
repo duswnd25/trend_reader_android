@@ -1,4 +1,4 @@
-package app.kimyeonjung.trendreader.data.info;
+package app.kimyeonjung.trendreader.data.feed;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -25,7 +25,8 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
 
     private LinkedList<FeedItem> feedList = new LinkedList<>();
     private Context context;
-    private boolean isPaletteUse;
+    private boolean isPaletteUse = true;
+
 
     public FeedAdapter(Context context, Boolean isPaletteUse, LinkedList<FeedItem> feedList) {
         this.context = context;

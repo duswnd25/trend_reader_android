@@ -1,8 +1,9 @@
-package app.kimyeonjung.trendreader.data.info;
+package app.kimyeonjung.trendreader.data.feed;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
-import android.support.v7.graphics.Palette;
+import android.support.v4.widget.ContentLoadingProgressBar;
 
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -18,11 +19,13 @@ public class FeedManager {
     private OnFinishCallback callback;
 
     public void fetchFeed(String requestUrl, OnFinishCallback callback) {
+
         this.callback = callback;
         new FeedFetcher().execute(requestUrl);
     }
 
     public interface OnFinishCallback {
+
         void done(LinkedList<FeedItem> result);
     }
 
@@ -31,13 +34,16 @@ public class FeedManager {
 
     @SuppressLint("StaticFieldLeak")
     private class FeedFetcher extends AsyncTask<String, Void, LinkedList<FeedItem>> {
+
         @Override
         protected void onPreExecute() {
+
             super.onPreExecute();
         }
 
         @Override
         protected void onPostExecute(LinkedList<FeedItem> result) {
+
             super.onPostExecute(result);
             Collections.sort(result, (f1, f2) -> f2.getUpdateAt().compareTo(f1.getUpdateAt()));
             callback.done(result);
@@ -50,6 +56,7 @@ public class FeedManager {
 
         @Override
         protected LinkedList<FeedItem> doInBackground(String... params) {
+
             LinkedList<FeedItem> feedList = new LinkedList<>();
             try {
                 OkHttpClient client = new OkHttpClient();

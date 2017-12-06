@@ -1,27 +1,20 @@
 package app.kimyeonjung.trendreader.ui;
 
-import android.app.SearchManager;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.ContentLoadingProgressBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
-import android.widget.EditText;
 
 import java.util.LinkedList;
 
@@ -31,13 +24,13 @@ import app.kimyeonjung.trendreader.data.feed.FeedAdapter;
 import app.kimyeonjung.trendreader.data.feed.FeedItem;
 import app.kimyeonjung.trendreader.data.feed.FeedManager;
 
-public class FeedSearch extends Fragment {
+public class FeedBookMark extends Fragment {
 
     private Context context;
     private LinkedList<FeedItem> feedList = new LinkedList<>();
     private FeedAdapter feedAdapter;
 
-    public FeedSearch() {
+    public FeedBookMark() {
 
         setHasOptionsMenu(true);
     }
@@ -53,7 +46,6 @@ public class FeedSearch extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
         inflater.inflate(R.menu.feed_search, menu);
-        initSearchView(menu.findItem(R.id.menu_search));
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -113,45 +105,6 @@ public class FeedSearch extends Fragment {
             progressBar.hide();
             feedList.addAll(result);
             feedAdapter.notifyDataSetChanged();
-        });
-    }
-
-    private void initSearchView(MenuItem searchItem) {
-        SearchManager searchManager = (SearchManager) context.getSystemService(Context.SEARCH_SERVICE);
-
-        SearchView searchView = null;
-        if (searchItem != null) {
-            searchView = (SearchView) searchItem.getActionView();
-            searchView.setIconified(true);
-        }
-
-        if (searchView == null) {
-            return;
-        }
-
-        if (searchManager != null) {
-            searchView.setSearchableInfo(searchManager.getSearchableInfo(((AppCompatActivity) context).getComponentName()));
-        }
-
-        EditText queryEdit = searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
-        queryEdit.setHintTextColor(Color.WHITE);
-        queryEdit.setTextColor(Color.WHITE);
-        queryEdit.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
-
-        SearchView finalSearchView = searchView;
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(final String query) {
-                finalSearchView.clearFocus();
-
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-
-                return false;
-            }
         });
     }
 }
