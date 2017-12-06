@@ -118,6 +118,7 @@ public class FeedSearch extends Fragment {
     }
 
     private void initSearchView(MenuItem searchItem) {
+
         SearchManager searchManager = (SearchManager) context.getSystemService(Context.SEARCH_SERVICE);
 
         SearchView searchView = null;
@@ -143,16 +144,15 @@ public class FeedSearch extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(final String query) {
-
+                finalSearchView.clearFocus();
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                finalSearchView.clearFocus();
                 feedListFiltered.clear();
                 for (FeedItem item : feedList) {
-                    if (item.getAll().contains(newText)) {
+                    if (item.getAll().toLowerCase().contains(newText.toLowerCase())) {
                         feedListFiltered.add(item);
                     }
                 }
