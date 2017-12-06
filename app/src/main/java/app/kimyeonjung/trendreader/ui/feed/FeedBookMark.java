@@ -23,6 +23,8 @@ import app.kimyeonjung.trendreader.core.Const;
 import app.kimyeonjung.trendreader.data.feed.FeedAdapter;
 import app.kimyeonjung.trendreader.data.feed.FeedItem;
 import app.kimyeonjung.trendreader.data.feed.FeedManager;
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 public class FeedBookMark extends Fragment {
 
@@ -40,6 +42,13 @@ public class FeedBookMark extends Fragment {
 
         super.onAttach(context);
         this.context = context;
+
+        RealmConfiguration bookMarkConfig = new RealmConfiguration.Builder()
+                .name(Const.DB.BOOK_MAKR)
+                .schemaVersion(1)
+                .build();
+
+        Realm myRealm = Realm.getInstance(bookMarkConfig);
     }
 
     @Override

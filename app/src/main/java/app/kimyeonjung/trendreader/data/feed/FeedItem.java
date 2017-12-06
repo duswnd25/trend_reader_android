@@ -1,9 +1,11 @@
 package app.kimyeonjung.trendreader.data.feed;
 
-import java.util.Calendar;
 import java.util.Date;
 
-public class FeedItem {
+import io.realm.RealmObject;
+
+public class FeedItem extends RealmObject{
+    
     private String blogTag, faviconUrl, blogName, blogUrl, postTitle, postUrl, postContent;
     private Date updateAt;
 
@@ -18,11 +20,11 @@ public class FeedItem {
         this.blogTag = blogTag;
     }
 
-    public String getFaviconUrl() {
+    String getFaviconUrl() {
         return faviconUrl;
     }
 
-    public void setFaviconUrl(String faviconUrl) {
+    void setFaviconUrl(String faviconUrl) {
         this.faviconUrl = faviconUrl;
     }
 
@@ -30,7 +32,7 @@ public class FeedItem {
         return blogName;
     }
 
-    public void setBlogName(String blogName) {
+    void setBlogName(String blogName) {
         this.blogName = blogName;
     }
 
@@ -38,15 +40,15 @@ public class FeedItem {
         return blogUrl;
     }
 
-    public void setBlogUrl(String blogUrl) {
+    void setBlogUrl(String blogUrl) {
         this.blogUrl = blogUrl;
     }
 
-    public String getPostTitle() {
+    String getPostTitle() {
         return postTitle;
     }
 
-    public void setPostTitle(String postTitle) {
+    void setPostTitle(String postTitle) {
         this.postTitle = postTitle;
     }
 
@@ -54,41 +56,24 @@ public class FeedItem {
         return postUrl;
     }
 
-    public void setPostUrl(String postUrl) {
+    void setPostUrl(String postUrl) {
         this.postUrl = postUrl;
     }
 
-    public String getPostContent() {
+    String getPostContent() {
         return postContent;
     }
 
-    public void setPostContent(String postContent) {
+    void setPostContent(String postContent) {
         this.postContent = postContent;
     }
 
-    public Date getUpdateAt() {
+    Date getUpdateAt() {
         return updateAt;
     }
 
-    public void setUpdateAt(String input) {
-        //2017년 12월 5일 9시 34분
-        String[] temp = input
-                .replaceAll("년", "")
-                .replaceAll("월", "")
-                .replaceAll("일", "")
-                .replaceAll("시", "")
-                .replaceAll("분", "")
-                .split("\\s");
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(
-                Integer.parseInt(temp[0]),
-                Integer.parseInt(temp[1]),
-                Integer.parseInt(temp[2]),
-                Integer.parseInt(temp[3]),
-                Integer.parseInt(temp[4])
-        );
-        this.updateAt = calendar.getTime();
+    void setUpdateAt(Date updateAt) {
+        this.updateAt = updateAt;
     }
 
     public String getAll() {

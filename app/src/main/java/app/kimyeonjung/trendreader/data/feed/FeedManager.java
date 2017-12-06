@@ -15,6 +15,8 @@ import org.json.JSONObject;
 import java.util.Collections;
 import java.util.LinkedList;
 
+import app.kimyeonjung.trendreader.core.Utils;
+
 public class FeedManager {
     private OnFinishCallback callback;
 
@@ -78,7 +80,7 @@ public class FeedManager {
                     feedItem.setPostTitle(tempJson.getString("post_title").replaceAll("\n", "").trim());
                     feedItem.setPostContent(tempJson.getString("post_content").trim());
                     feedItem.setPostUrl(tempJson.getString("post_url"));
-                    feedItem.setUpdateAt(tempJson.getString("update_at"));
+                    feedItem.setUpdateAt(Utils.stringToDate(tempJson.getString("update_at")));
 
                     feedList.add(feedItem);
                 }

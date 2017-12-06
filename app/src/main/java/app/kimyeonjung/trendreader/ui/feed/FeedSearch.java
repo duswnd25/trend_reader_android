@@ -70,7 +70,7 @@ public class FeedSearch extends Fragment {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         boolean isPaletteUse = prefs.getBoolean(getString(R.string.pref_feed_palette_use), true);
-        int staggerColSize = prefs.getInt(getString(R.string.pref_feed_col_num), 2);
+        int staggerColSize = prefs.getInt(getString(R.string.pref_feed_col_num), 3);
 
         feedAdapter = new FeedAdapter(getContext(), isPaletteUse, feedListFiltered);
 
@@ -108,6 +108,7 @@ public class FeedSearch extends Fragment {
     private void initData(View view) {
 
         ContentLoadingProgressBar progressBar = view.findViewById(R.id.fragment_recycler_progress);
+        feedListFiltered.clear();
         progressBar.show();
         new FeedManager().fetchFeed(Const.API_URL.ALL, result -> {
             progressBar.hide();
