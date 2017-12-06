@@ -75,6 +75,9 @@ public class MainActivity extends AppCompatActivity
                 case 1:
                     icon.setImageDrawable(res.getDrawable(R.drawable.ic_search));
                     break;
+                case 2:
+                    icon.setImageDrawable(res.getDrawable(R.drawable.ic_database));
+                    break;
                 default:
                     throw new IllegalStateException("Invalid position: " + position);
             }
