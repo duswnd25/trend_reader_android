@@ -90,4 +90,8 @@ public class FeedItem {
         );
         this.updateAt = calendar.getTime();
     }
+
+    public String getAll() {
+        return blogTag + blogName + postTitle + postContent;
+    }
 }

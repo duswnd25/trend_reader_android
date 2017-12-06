@@ -1,4 +1,4 @@
-package app.kimyeonjung.trendreader.ui;
+package app.kimyeonjung.trendreader.ui.feed;
 
 import android.app.SearchManager;
 import android.content.Context;
@@ -52,7 +52,7 @@ public class FeedTrend extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
-        inflater.inflate(R.menu.feed_search, menu);
+        inflater.inflate(R.menu.default_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 

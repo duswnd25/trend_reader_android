@@ -22,6 +22,9 @@ import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
 import app.kimyeonjung.trendreader.R;
+import app.kimyeonjung.trendreader.ui.feed.FeedBookMark;
+import app.kimyeonjung.trendreader.ui.feed.FeedSearch;
+import app.kimyeonjung.trendreader.ui.feed.FeedTrend;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -100,7 +103,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.feed_all, menu);
+        getMenuInflater().inflate(R.menu.default_menu, menu);
         return true;
     }
 
