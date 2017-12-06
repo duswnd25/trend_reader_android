@@ -58,7 +58,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
                         super.onResourceReady(bitmap, anim);
                         if (isPaletteUse) {
                             Palette palette = Palette.from(bitmap).generate();
-                            Palette.Swatch vibrantSwatch = palette.getLightVibrantSwatch();
+                            Palette.Swatch vibrantSwatch = palette.getVibrantSwatch();
                             if (vibrantSwatch != null) {
                                 holder.descriptionContainer.setBackgroundColor(vibrantSwatch.getRgb());
                                 holder.description.setTextColor(vibrantSwatch.getBodyTextColor());
