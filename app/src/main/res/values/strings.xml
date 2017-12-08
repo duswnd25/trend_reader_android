@@ -16,4 +16,7 @@
     <!-- PREFERENCE -->
     <string name="pref_feed_col_num">pref_feed_col_num</string>
     <string name="pref_feed_palette_use">pref_feed_palette_use</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="preference">사용자 설정</string>
+    <string name="action_setting">설정</string>
 </resources>

@@ -8,11 +8,6 @@
 
     <dimen name="interval_4">4dp</dimen>
     <dimen name="interval_8">8dp</dimen>
-    <dimen name="interval_12">12dp</dimen>
-    <dimen name="interval_16">16dp</dimen>
-    <dimen name="feed_image_size">72dp</dimen>
     <dimen name="card_radius">5dp</dimen>
-    <dimen name="default_text_size">12dp</dimen>
     <dimen name="feed_background_image_height">120dp</dimen>
-    <dimen name="progress_height">2dp</dimen>
 </resources>
