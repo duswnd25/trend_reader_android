@@ -1,35 +1,28 @@
 package app.kimyeonjung.trendreader.ui.feed;
 
-import android.app.SearchManager;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.ContentLoadingProgressBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
-import android.widget.EditText;
 
 import java.util.LinkedList;
 
 import app.kimyeonjung.trendreader.R;
 import app.kimyeonjung.trendreader.core.Const;
-import app.kimyeonjung.trendreader.data.feed.FeedAdapter;
+import app.kimyeonjung.trendreader.data.feed.fetch.FeedAdapter;
 import app.kimyeonjung.trendreader.data.feed.FeedItem;
-import app.kimyeonjung.trendreader.data.feed.FeedManager;
+import app.kimyeonjung.trendreader.data.feed.fetch.FeedManager;
 
 public class FeedTrend extends Fragment {
 

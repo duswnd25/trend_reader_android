@@ -20,9 +20,9 @@ import java.util.LinkedList;
 
 import app.kimyeonjung.trendreader.R;
 import app.kimyeonjung.trendreader.core.Const;
-import app.kimyeonjung.trendreader.data.feed.FeedAdapter;
+import app.kimyeonjung.trendreader.data.feed.fetch.FeedAdapter;
 import app.kimyeonjung.trendreader.data.feed.FeedItem;
-import app.kimyeonjung.trendreader.data.feed.FeedManager;
+import app.kimyeonjung.trendreader.data.feed.fetch.FeedManager;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
@@ -31,6 +31,7 @@ public class FeedBookMark extends Fragment {
     private Context context;
     private LinkedList<FeedItem> feedList = new LinkedList<>();
     private FeedAdapter feedAdapter;
+    private Realm realm;
 
     public FeedBookMark() {
 
@@ -48,7 +49,7 @@ public class FeedBookMark extends Fragment {
                 .schemaVersion(1)
                 .build();
 
-        Realm myRealm = Realm.getInstance(bookMarkConfig);
+        realm = Realm.getInstance(bookMarkConfig);
     }
 
     @Override

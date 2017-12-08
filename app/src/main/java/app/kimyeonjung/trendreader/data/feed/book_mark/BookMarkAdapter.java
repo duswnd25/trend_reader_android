@@ -1,4 +1,4 @@
-package app.kimyeonjung.trendreader.data.feed;
+package app.kimyeonjung.trendreader.data.feed.book_mark;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -19,28 +19,29 @@ import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import java.util.LinkedList;
 
 import app.kimyeonjung.trendreader.R;
+import app.kimyeonjung.trendreader.data.feed.FeedItem;
 import me.grantland.widget.AutofitTextView;
 
-public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
+public class BookMarkAdapter extends RecyclerView.Adapter<BookMarkAdapter.ViewHolder> {
 
     private LinkedList<FeedItem> feedList = new LinkedList<>();
     private Context context;
     private boolean isPaletteUse = true;
 
 
-    public FeedAdapter(Context context, Boolean isPaletteUse, LinkedList<FeedItem> feedList) {
+    public BookMarkAdapter(Context context, Boolean isPaletteUse, LinkedList<FeedItem> feedList) {
         this.context = context;
         this.feedList = feedList;
         this.isPaletteUse = isPaletteUse;
     }
 
     @Override
-    public FeedAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BookMarkAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_feed, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(FeedAdapter.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
+    public void onBindViewHolder(BookMarkAdapter.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         FeedItem temp = feedList.get(position);
         holder.title.setText(temp.getPostTitle());
 

@@ -1,4 +1,4 @@
-package app.kimyeonjung.trendreader.data.feed;
+package app.kimyeonjung.trendreader.data.feed.fetch;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 
 import app.kimyeonjung.trendreader.core.Utils;
+import app.kimyeonjung.trendreader.data.feed.FeedItem;
 
 public class FeedManager {
     private OnFinishCallback callback;

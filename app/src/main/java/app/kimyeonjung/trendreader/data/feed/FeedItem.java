@@ -5,7 +5,7 @@ import java.util.Date;
 import io.realm.RealmObject;
 
 public class FeedItem extends RealmObject{
-    
+
     private String blogTag, faviconUrl, blogName, blogUrl, postTitle, postUrl, postContent;
     private Date updateAt;
 
@@ -20,11 +20,11 @@ public class FeedItem extends RealmObject{
         this.blogTag = blogTag;
     }
 
-    String getFaviconUrl() {
+    public String getFaviconUrl() {
         return faviconUrl;
     }
 
-    void setFaviconUrl(String faviconUrl) {
+    public void setFaviconUrl(String faviconUrl) {
         this.faviconUrl = faviconUrl;
     }
 
@@ -32,7 +32,7 @@ public class FeedItem extends RealmObject{
         return blogName;
     }
 
-    void setBlogName(String blogName) {
+    public void setBlogName(String blogName) {
         this.blogName = blogName;
     }
 
@@ -40,15 +40,15 @@ public class FeedItem extends RealmObject{
         return blogUrl;
     }
 
-    void setBlogUrl(String blogUrl) {
+    public void setBlogUrl(String blogUrl) {
         this.blogUrl = blogUrl;
     }
 
-    String getPostTitle() {
+    public String getPostTitle() {
         return postTitle;
     }
 
-    void setPostTitle(String postTitle) {
+    public void setPostTitle(String postTitle) {
         this.postTitle = postTitle;
     }
 
@@ -56,23 +56,23 @@ public class FeedItem extends RealmObject{
         return postUrl;
     }
 
-    void setPostUrl(String postUrl) {
+    public void setPostUrl(String postUrl) {
         this.postUrl = postUrl;
     }
 
-    String getPostContent() {
+    public String getPostContent() {
         return postContent;
     }
 
-    void setPostContent(String postContent) {
+    public void setPostContent(String postContent) {
         this.postContent = postContent;
     }
 
-    Date getUpdateAt() {
+    public Date getUpdateAt() {
         return updateAt;
     }
 
-    void setUpdateAt(Date updateAt) {
+    public void setUpdateAt(Date updateAt) {
         this.updateAt = updateAt;
     }
 
