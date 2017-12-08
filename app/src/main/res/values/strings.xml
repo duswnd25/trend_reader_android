@@ -6,17 +6,18 @@
     <string name="navigation_drawer_close">메뉴 닫기</string>
 
     <!-- Menu -->
+    <string name="preference">사용자 설정</string>
     <string name="action_settings">설정</string>
 
-    <!-- Tab -->
+    <!-- Title -->
     <string name="title_feed_all">전체 피드</string>
     <string name="title_feed_trend">트렌드</string>
     <string name="title_feed_book_mark">북마크</string>
+    <string name="title_setting">설정</string>
 
     <!-- PREFERENCE -->
+    <string name="pref_feed_col_num_des">Feed column</string>
     <string name="pref_feed_col_num">pref_feed_col_num</string>
+    <string name="pref_feed_palette_use_des">Palette 사용</string>
     <string name="pref_feed_palette_use">pref_feed_palette_use</string>
-    <string name="title_activity_settings">Settings</string>
-    <string name="preference">사용자 설정</string>
-    <string name="action_setting">설정</string>
 </resources>
