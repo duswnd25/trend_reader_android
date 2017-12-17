@@ -10,4 +10,5 @@
     <dimen name="interval_8">8dp</dimen>
     <dimen name="card_radius">5dp</dimen>
     <dimen name="feed_background_image_height">120dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 </resources>

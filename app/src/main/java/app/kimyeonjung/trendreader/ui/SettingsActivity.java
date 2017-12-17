@@ -21,7 +21,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 
     private void initClickListener() {
         // 텍스트크기
-        findPreference("pref_text_size").setOnPreferenceClickListener(new android.preference.Preference.OnPreferenceClickListener() {
+        findPreference(getString(R.string.pref_feed_col_num)).setOnPreferenceClickListener(new android.preference.Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(android.preference.Preference preference) {
                 return false;

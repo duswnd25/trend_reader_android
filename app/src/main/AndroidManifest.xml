@@ -6,11 +6,12 @@
 
     <application
         android:name=".core.TrendReader"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:testOnly="false"
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.MainActivity"
@@ -24,7 +25,10 @@
         </activity>
         <activity
             android:name=".ui.SettingsActivity"
-            android:label="@string/title_setting"></activity>
+            android:label="@string/title_setting" />
+        <activity
+            android:name=".ui.feed.DetailView"
+            android:label="@string/title_activity_detail_view"></activity>
     </application>
 
 </manifest>
