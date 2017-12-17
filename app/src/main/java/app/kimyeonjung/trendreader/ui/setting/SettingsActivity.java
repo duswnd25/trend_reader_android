@@ -1,4 +1,4 @@
-package app.kimyeonjung.trendreader.ui;
+package app.kimyeonjung.trendreader.ui.setting;
 
 
 import android.os.Bundle;
