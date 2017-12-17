@@ -52,7 +52,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
 
         holder.container.setOnClickListener(view -> {
             Intent intent = new Intent();
-            intent.putExtra(Const.INTENT.BLOG_TITLE, temp.getBlogName());
+            intent.putExtra(Const.INTENT.BLOG_NAME, temp.getBlogName());
             intent.putExtra(Const.INTENT.FAVICON_URL, temp.getFaviconUrl());
             intent.putExtra(Const.INTENT.POST_TITLE, temp.getPostTitle());
             intent.putExtra(Const.INTENT.POST_CONTENT, temp.getPostContent());

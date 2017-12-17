@@ -10,7 +10,7 @@ public class Const {
     }
 
     public class INTENT {
-        public static final String BLOG_TITLE = "blog_title";
+        public static final String BLOG_NAME = "blog_name";
         public static final String POST_URL = "post_url";
         public static final String POST_CONTENT = "post_content";
         public static final String FAVICON_URL = "favicon_url";

@@ -26,6 +26,7 @@ import app.kimyeonjung.trendreader.R;
 import app.kimyeonjung.trendreader.ui.feed.FeedBookMark;
 import app.kimyeonjung.trendreader.ui.feed.FeedSearch;
 import app.kimyeonjung.trendreader.ui.feed.FeedTrend;
+import app.kimyeonjung.trendreader.ui.setting.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.SettingsActivity"
+            android:name=".ui.setting.SettingsActivity"
             android:label="@string/title_setting" />
         <activity
             android:name=".ui.feed.DetailView"
