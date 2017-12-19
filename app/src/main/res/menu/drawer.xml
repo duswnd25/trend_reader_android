@@ -2,13 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-
     <group android:checkableBehavior="single">
         <item
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_ask"
+            android:title="@string/title_activity_about_dev" />
     </group>
-
     <item android:title="@string/preference">
         <menu>
             <item
@@ -20,11 +19,4 @@
                 android:title="Send" />
         </menu>
     </item>
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_about"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="About" />
-    </group>
-
 </menu>
