@@ -42,6 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:maxLines="1"
+                android:gravity="center"
                 android:paddingEnd="@dimen/interval_4"
                 android:paddingStart="@dimen/interval_4"
                 android:textAlignment="center"
@@ -62,7 +63,6 @@
                 style="@style/Base.TextAppearance.AppCompat.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLines="10"
                 android:textColor="@android:color/darker_gray"
                 tools:text="내용" />
         </LinearLayout>
