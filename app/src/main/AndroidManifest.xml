@@ -28,7 +28,7 @@
             android:name=".ui.feed.DetailView"
             android:label="@string/title_activity_detail_view" />
         <activity
-            android:name=".AboutDev"
+            android:name=".ui.AboutDev"
             android:label="@string/title_activity_about_dev"></activity>
     </application>
 

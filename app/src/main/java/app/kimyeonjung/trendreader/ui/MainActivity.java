@@ -22,7 +22,6 @@ import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
-import app.kimyeonjung.trendreader.AboutDev;
 import app.kimyeonjung.trendreader.R;
 import app.kimyeonjung.trendreader.ui.feed.FeedBookMark;
 import app.kimyeonjung.trendreader.ui.feed.FeedSearch;

@@ -1,4 +1,4 @@
-package app.kimyeonjung.trendreader;
+package app.kimyeonjung.trendreader.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.widget.FrameLayout;
 
 import com.vansuita.materialabout.builder.AboutBuilder;
 import com.vansuita.materialabout.views.AboutView;
+
+import app.kimyeonjung.trendreader.R;
 
 public class AboutDev extends AppCompatActivity {
 
