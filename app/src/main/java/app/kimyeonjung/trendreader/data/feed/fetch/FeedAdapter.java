@@ -51,13 +51,13 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         holder.title.setText(temp.getPostTitle());
 
         holder.container.setOnClickListener(view -> {
-            Intent intent = new Intent();
+            Intent intent = new Intent(context, DetailView.class);
             intent.putExtra(Const.INTENT.BLOG_NAME, temp.getBlogName());
             intent.putExtra(Const.INTENT.FAVICON_URL, temp.getFaviconUrl());
             intent.putExtra(Const.INTENT.POST_TITLE, temp.getPostTitle());
             intent.putExtra(Const.INTENT.POST_CONTENT, temp.getPostContent());
             intent.putExtra(Const.INTENT.POST_URL, temp.getPostUrl());
-            context.startActivity(new Intent(context, DetailView.class));
+            context.startActivity(intent);
         });
 
 
@@ -75,6 +75,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         Glide.with(context).load(temp.getFaviconUrl()).asBitmap()
                 .centerCrop().placeholder(R.mipmap.ic_launcher_round)
                 .into(new BitmapImageViewTarget(holder.profile) {
+                    @SuppressWarnings("unchecked")
                     @Override
                     public void onResourceReady(Bitmap bitmap, GlideAnimation anim) {
                         super.onResourceReady(bitmap, anim);
