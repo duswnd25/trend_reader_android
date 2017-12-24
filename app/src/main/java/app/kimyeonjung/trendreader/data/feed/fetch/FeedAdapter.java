@@ -97,8 +97,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        private AutofitTextView title;
-        private TextView description;
+        private TextView title, description;
         private ImageView profile;
         private LinearLayout descriptionContainer;
         private CardView container;

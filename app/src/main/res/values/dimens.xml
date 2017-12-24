@@ -6,6 +6,10 @@
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
+    <!-- TextSize-->
+    <dimen name="feed_title">32sp</dimen>
+
+
     <dimen name="interval_4">4dp</dimen>
     <dimen name="interval_8">8dp</dimen>
     <dimen name="card_radius">5dp</dimen>

@@ -48,4 +48,6 @@ dependencies {
     implementation 'com.ogaclejapan.smarttablayout:utils-v4:1.6.1@aar'
     // Developer About
     implementation 'com.github.jrvansuita:MaterialAbout:0.1.9'
+    // Shimmer Recycler View
+    implementation 'com.github.sharish:ShimmerRecyclerView:v1.1'
 }

@@ -16,6 +16,8 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.cooltechworks.views.shimmer.ShimmerRecyclerView;
+
 import java.util.LinkedList;
 
 import app.kimyeonjung.trendreader.R;
@@ -87,7 +89,8 @@ public class FeedBookMark extends Fragment {
         feedLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS);
 
         // RecyclerView
-        RecyclerView feedView = view.findViewById(R.id.fragment_recycler_view);
+        ShimmerRecyclerView feedView = view.findViewById(R.id.fragment_recycler_view);
+        feedView.showShimmerAdapter();
         feedView.setNestedScrollingEnabled(true);
         feedView.setHasFixedSize(true);
         feedView.setLayoutManager(feedLayoutManager);
@@ -109,10 +112,7 @@ public class FeedBookMark extends Fragment {
 
     private void initData(View view) {
 
-        ContentLoadingProgressBar progressBar = view.findViewById(R.id.fragment_recycler_progress);
-        progressBar.show();
         new FeedManager().fetchFeed(Const.API_URL.ALL, result -> {
-            progressBar.hide();
             feedList.addAll(result);
             feedAdapter.notifyDataSetChanged();
         });

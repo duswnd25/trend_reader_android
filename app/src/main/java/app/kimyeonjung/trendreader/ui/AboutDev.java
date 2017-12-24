@@ -12,7 +12,7 @@ import com.vansuita.materialabout.views.AboutView;
 
 import app.kimyeonjung.trendreader.R;
 
-public class AboutDev extends AppCompatActivity {
+public class  AboutDev extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

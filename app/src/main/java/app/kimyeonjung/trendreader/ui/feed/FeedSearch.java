@@ -23,6 +23,8 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 
+import com.cooltechworks.views.shimmer.ShimmerRecyclerView;
+
 import java.util.LinkedList;
 
 import app.kimyeonjung.trendreader.R;
@@ -70,12 +72,11 @@ public class FeedSearch extends Fragment {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         boolean isPaletteUse = prefs.getBoolean(getString(R.string.pref_feed_palette_use), true);
-        int staggerColSize = prefs.getInt(getString(R.string.pref_feed_col_num), 3);
+        int staggerColSize = prefs.getInt(getString(R.string.pref_feed_col_num), 2);
 
         feedAdapter = new FeedAdapter(getContext(), isPaletteUse, feedListFiltered);
 
         initView(view, staggerColSize);
-        initData(view);
     }
 
     private void initView(View view, int staggerColSize) {
@@ -85,35 +86,18 @@ public class FeedSearch extends Fragment {
         feedLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS);
 
         // RecyclerView
-        RecyclerView feedView = view.findViewById(R.id.fragment_recycler_view);
+        ShimmerRecyclerView feedView;
+        feedView = view.findViewById(R.id.fragment_recycler_view);
         feedView.setNestedScrollingEnabled(true);
-        feedView.setHasFixedSize(true);
         feedView.setLayoutManager(feedLayoutManager);
-        feedView.setAdapter(feedAdapter);
+        feedView.showShimmerAdapter();
 
-        // Scroll Change Listener
-        feedView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-            }
-        });
-    }
-
-    private void initData(View view) {
-
-        ContentLoadingProgressBar progressBar = view.findViewById(R.id.fragment_recycler_progress);
         feedListFiltered.clear();
-        progressBar.show();
         new FeedManager().fetchFeed(Const.API_URL.ALL, result -> {
-            progressBar.hide();
+            feedView.hideShimmerAdapter();
             feedList.addAll(result);
             feedListFiltered.addAll(result);
+            feedView.setAdapter(feedAdapter);
             feedAdapter.notifyDataSetChanged();
         });
     }
