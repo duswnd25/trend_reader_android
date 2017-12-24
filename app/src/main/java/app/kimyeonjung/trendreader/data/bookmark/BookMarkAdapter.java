@@ -1,4 +1,4 @@
-package app.kimyeonjung.trendreader.data.feed.book_mark;
+package app.kimyeonjung.trendreader.data.bookmark;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

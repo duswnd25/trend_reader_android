@@ -1,4 +1,4 @@
-package app.kimyeonjung.trendreader.data.feed.book_mark;
+package app.kimyeonjung.trendreader.data.bookmark;
 
 import java.util.LinkedList;
 
