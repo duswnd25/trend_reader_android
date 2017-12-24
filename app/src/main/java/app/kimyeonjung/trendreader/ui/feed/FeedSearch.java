@@ -121,6 +121,8 @@ public class FeedSearch extends Fragment {
 
         MenuItem mSearchMenuItem = menu.findItem(R.id.menu_search);
         SearchView searchView = (SearchView) mSearchMenuItem.getActionView();
+        searchView.setIconified(false);
+        searchView.clearFocus();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
