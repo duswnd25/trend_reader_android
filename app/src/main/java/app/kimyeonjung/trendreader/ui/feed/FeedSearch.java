@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.app.AppCompatActivity;
@@ -81,17 +82,35 @@ public class FeedSearch extends Fragment {
 
     private void initView(View view, int staggerColSize) {
 
+        // RecyclerView
+        ShimmerRecyclerView feedView = view.findViewById(R.id.fragment_recycler_view);
+
+        // Scroll Up to Top
+        FloatingActionButton upToTopButton = view.findViewById(R.id.fragment_recycler_up_to_top);
+        upToTopButton.setOnClickListener(view1 -> feedView.smoothScrollToPosition(0));
+
         // StaggerGridLayout
         StaggeredGridLayoutManager feedLayoutManager = new StaggeredGridLayoutManager(staggerColSize, StaggeredGridLayoutManager.VERTICAL);
         feedLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS);
 
-        // RecyclerView
-        ShimmerRecyclerView feedView;
-        feedView = view.findViewById(R.id.fragment_recycler_view);
+        // Recycler Attribute
+        feedView.setGridChildCount(staggerColSize);
         feedView.setNestedScrollingEnabled(true);
         feedView.setLayoutManager(feedLayoutManager);
         feedView.showShimmerAdapter();
+        feedView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    upToTopButton.show();
+                } else {
+                    upToTopButton.hide();
+                }
+            }
+        });
 
+        // init data
         feedListFiltered.clear();
         new FeedManager().fetchFeed(Const.API_URL.ALL, result -> {
             feedView.hideShimmerAdapter();
@@ -100,6 +119,7 @@ public class FeedSearch extends Fragment {
             feedView.setAdapter(feedAdapter);
             feedAdapter.notifyDataSetChanged();
         });
+
     }
 
     private void initSearchView(MenuItem searchItem) {

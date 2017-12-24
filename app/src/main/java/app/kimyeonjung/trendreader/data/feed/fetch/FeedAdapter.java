@@ -48,8 +48,8 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
     public void onBindViewHolder(FeedAdapter.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
 
         FeedItem temp = feedList.get(position);
-        holder.title.setText(temp.getPostTitle());
 
+        // Container
         holder.container.setOnClickListener(view -> {
             Intent intent = new Intent(context, DetailView.class);
             intent.putExtra(Const.INTENT.BLOG_NAME, temp.getBlogName());
@@ -60,7 +60,11 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
             context.startActivity(intent);
         });
 
+        // Title
+        holder.title.setText(temp.getPostTitle());
+        holder.title.setSelected(true);
 
+        // Content
         String content = temp.getPostContent();
         if (content.length() != 0) {
             if (temp.getPostContent().length() > 300) {
@@ -72,6 +76,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
             holder.description.setVisibility(View.GONE);
         }
 
+        // Favicon Image View
         Glide.with(context).load(temp.getFaviconUrl()).asBitmap()
                 .centerCrop().placeholder(R.mipmap.ic_launcher_round)
                 .into(new BitmapImageViewTarget(holder.profile) {

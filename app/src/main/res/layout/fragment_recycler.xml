@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:listitem="@layout/item_feed">
@@ -13,11 +13,21 @@
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:shimmer_demo_angle="20"
-        app:shimmer_demo_child_count="10"
-        app:shimmer_demo_grid_child_count="2"
+        app:shimmer_demo_child_count="2"
+        app:shimmer_demo_grid_child_count="1"
         app:shimmer_demo_layout="@layout/item_feed_demo"
         app:shimmer_demo_layout_manager_type="grid"
         app:shimmer_demo_shimmer_color="#21ffffff"
         tools:context="app.kimyeonjung.trendreader.ui.FeedAll"
         tools:listitem="@layout/item_feed" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fragment_recycler_up_to_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:src="@drawable/ic_arrow_up"
+        app:fabSize="auto"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:useCompatPadding="true" />
 </FrameLayout>
