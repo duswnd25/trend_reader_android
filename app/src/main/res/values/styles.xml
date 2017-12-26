@@ -17,4 +17,9 @@
         <item name="actionMenuTextColor">@android:color/white</item>
     </style>
 
+    <style name="AppTheme.CollapseToolbar" parent="AppTheme">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:fontFamily">@font/bm_jua</item>
+    </style>
+
 </resources>

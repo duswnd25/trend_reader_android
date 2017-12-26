@@ -13,7 +13,9 @@
         <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:collapsedTitleTextAppearance="@style/AppTheme.CollapseToolbar"
             app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleTextAppearance="@style/AppTheme.CollapseToolbar"
             app:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed">
 
             <FrameLayout
@@ -38,9 +40,7 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
                 app:navigationIcon="?attr/homeAsUpIndicator"
-                app:subtitleTextColor="@android:color/white"
-                app:theme="@style/AppTheme.ToolBarStyle"
-                app:titleTextColor="@android:color/white" />
+                app:theme="@style/AppTheme.ToolBarStyle" />
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
@@ -51,10 +51,10 @@
 
         <TextView
             android:id="@+id/detail_text"
-            android:textColor="@android:color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin" />
+            android:layout_margin="@dimen/text_margin"
+            android:textColor="@android:color/black" />
     </android.support.v4.widget.NestedScrollView>
 
     <android.support.design.widget.FloatingActionButton
