@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.setItemIconTintList(null);
         initTabView();
     }
 
@@ -74,10 +73,10 @@ public class MainActivity extends AppCompatActivity
                     icon.setImageDrawable(res.getDrawable(R.drawable.ic_search_white));
                     break;
                 case 1:
-                    icon.setImageDrawable(res.getDrawable(R.drawable.ic_search));
+                    icon.setImageDrawable(res.getDrawable(R.drawable.ic_chart_white));
                     break;
                 case 2:
-                    icon.setImageDrawable(res.getDrawable(R.drawable.ic_bookmark_white));
+                    icon.setImageDrawable(res.getDrawable(R.drawable.ic_cabinet_white));
                     break;
                 default:
                     throw new IllegalStateException("Invalid position: " + position);

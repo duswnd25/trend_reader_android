@@ -23,6 +23,7 @@
                 app:layout_collapseParallaxMultiplier="0.7">
 
                 <ImageView
+                    android:id="@+id/detail_favicon"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:adjustViewBounds="true"
@@ -37,6 +38,7 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
                 app:navigationIcon="?attr/homeAsUpIndicator"
+                app:subtitleTextColor="@android:color/white"
                 app:theme="@style/AppTheme.ToolBarStyle"
                 app:titleTextColor="@android:color/white" />
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -49,12 +51,14 @@
 
         <TextView
             android:id="@+id/detail_text"
+            android:textColor="@android:color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin" />
     </android.support.v4.widget.NestedScrollView>
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/detail_link"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
