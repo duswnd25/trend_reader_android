@@ -28,6 +28,5 @@
         android:layout_gravity="center_horizontal|bottom"
         android:src="@drawable/ic_arrow_up"
         app:fabSize="auto"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:useCompatPadding="true" />
 </FrameLayout>
