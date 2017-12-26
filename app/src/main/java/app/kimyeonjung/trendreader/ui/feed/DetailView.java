@@ -3,15 +3,11 @@ package app.kimyeonjung.trendreader.ui.feed;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.app.Activity;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -21,8 +17,6 @@ import com.bumptech.glide.request.target.BitmapImageViewTarget;
 
 import app.kimyeonjung.trendreader.R;
 import app.kimyeonjung.trendreader.core.Const;
-
-import static android.provider.ContactsContract.CommonDataKinds.Website.URL;
 
 public class DetailView extends AppCompatActivity implements View.OnClickListener {
     private Intent intent;

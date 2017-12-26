@@ -1,9 +1,7 @@
 package app.kimyeonjung.trendreader.data.feed.fetch;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
-import android.support.v4.widget.ContentLoadingProgressBar;
 
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;

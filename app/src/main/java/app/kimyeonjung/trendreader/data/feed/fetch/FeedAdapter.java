@@ -24,7 +24,6 @@ import app.kimyeonjung.trendreader.R;
 import app.kimyeonjung.trendreader.core.Const;
 import app.kimyeonjung.trendreader.data.feed.FeedItem;
 import app.kimyeonjung.trendreader.ui.feed.DetailView;
-import me.grantland.widget.AutofitTextView;
 
 public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
 
