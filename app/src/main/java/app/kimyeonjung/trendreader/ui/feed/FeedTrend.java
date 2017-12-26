@@ -7,7 +7,6 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -22,8 +21,8 @@ import java.util.LinkedList;
 
 import app.kimyeonjung.trendreader.R;
 import app.kimyeonjung.trendreader.core.Const;
-import app.kimyeonjung.trendreader.data.feed.fetch.FeedAdapter;
 import app.kimyeonjung.trendreader.data.feed.FeedItem;
+import app.kimyeonjung.trendreader.data.feed.fetch.FeedAdapter;
 import app.kimyeonjung.trendreader.data.feed.fetch.FeedManager;
 
 public class FeedTrend extends Fragment {

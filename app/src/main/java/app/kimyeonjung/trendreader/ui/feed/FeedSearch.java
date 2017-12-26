@@ -11,7 +11,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,8 +24,8 @@ import java.util.LinkedList;
 
 import app.kimyeonjung.trendreader.R;
 import app.kimyeonjung.trendreader.core.Const;
-import app.kimyeonjung.trendreader.data.feed.fetch.FeedAdapter;
 import app.kimyeonjung.trendreader.data.feed.FeedItem;
+import app.kimyeonjung.trendreader.data.feed.fetch.FeedAdapter;
 import app.kimyeonjung.trendreader.data.feed.fetch.FeedManager;
 
 public class FeedSearch extends Fragment {
@@ -50,7 +49,7 @@ public class FeedSearch extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
-        inflater.inflate(R.menu.feed_search, menu);
+        inflater.inflate(R.menu.search_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 

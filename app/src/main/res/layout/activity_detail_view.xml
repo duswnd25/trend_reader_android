@@ -23,7 +23,6 @@
                 app:layout_collapseParallaxMultiplier="0.7">
 
                 <ImageView
-                    android:id="@+id/detail_favicon"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:adjustViewBounds="true"
@@ -38,7 +37,8 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
                 app:navigationIcon="?attr/homeAsUpIndicator"
-                app:theme="@style/AppTheme.ToolBarStyle" />
+                app:theme="@style/AppTheme.ToolBarStyle"
+                app:titleTextColor="@android:color/white" />
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
@@ -58,6 +58,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:src="@drawable/ic_connect"
+        android:src="@drawable/ic_link_white"
         app:useCompatPadding="true" />
 </android.support.design.widget.CoordinatorLayout>
