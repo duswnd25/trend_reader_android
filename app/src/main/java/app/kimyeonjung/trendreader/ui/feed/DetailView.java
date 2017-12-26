@@ -35,17 +35,38 @@ public class DetailView extends AppCompatActivity implements View.OnClickListene
         Toolbar toolbar = findViewById(R.id.detail_toolbar);
         toolbar.setTitle(intent.getStringExtra(Const.INTENT.BLOG_NAME));
 
-        initView();
+        initView(toolbar);
     }
 
-    private void initView() {
+    private void initView(Toolbar toolbar) {
         String blogTitle = intent.getStringExtra(Const.INTENT.BLOG_NAME);
         String faviconUrl = intent.getStringExtra(Const.INTENT.FAVICON_URL);
         String postTitle = intent.getStringExtra(Const.INTENT.POST_TITLE);
         String postContent = intent.getStringExtra(Const.INTENT.POST_CONTENT);
         String postUrl = intent.getStringExtra(Const.INTENT.POST_URL);
 
+        toolbar.setTitle(postTitle);
         ((TextView) findViewById(R.id.detail_text)).setText(postContent);
+
+        Glide.with(this).load(faviconUrl).asBitmap()
+                .centerCrop().placeholder(R.mipmap.ic_launcher_round)
+                .into(new BitmapImageViewTarget(findViewById(R.id.detail_favicon)) {
+                    @Override
+                    public void onResourceReady(Bitmap bitmap, GlideAnimation anim) {
+                        super.onResourceReady(bitmap, anim);
+                        /*
+                        if (isPaletteUse) {
+                            Palette palette = Palette.from(bitmap).generate();
+                            Palette.Swatch vibrantSwatch = palette.getVibrantSwatch();
+                            if (vibrantSwatch != null) {
+                                holder.descriptionContainer.setBackgroundColor(vibrantSwatch.getRgb());
+                                holder.description.setTextColor(vibrantSwatch.getBodyTextColor());
+                            }
+                        }*/
+                    }
+                });
+
+
     }
 
     @Override

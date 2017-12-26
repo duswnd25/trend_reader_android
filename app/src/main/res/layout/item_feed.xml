@@ -27,14 +27,14 @@
                 android:layout_height="match_parent"
                 android:background="@android:color/white"
                 android:scaleType="centerCrop"
-                tools:src="@drawable/ic_launcher_background" />
+                tools:src="@drawable/ic_launcher_background"
+                android:contentDescription="@string/feed_image" />
 
-
-            <ImageView
+            <View
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/shadow" />
+                android:background="@drawable/shadow" />
 
             <TextView
                 android:id="@+id/feed_title"

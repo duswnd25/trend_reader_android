@@ -17,6 +17,12 @@
     <string name="title_activity_about_dev">About Me</string>
     <string name="title_activity_detail_view">상세보기</string>
 
+    <!-- 상세보기 -->
+    <string name="detail_image">상세보기 이미지</string>
+
+    <!-- 피드 -->
+    <string name="feed_image">피드 이미지</string>
+
     <!-- PREFERENCE -->
     <string name="pref_feed_col_num_des">Feed column</string>
     <string name="pref_feed_col_num">pref_feed_col_num</string>

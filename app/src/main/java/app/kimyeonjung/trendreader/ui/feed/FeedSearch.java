@@ -32,7 +32,7 @@ import app.kimyeonjung.trendreader.data.feed.fetch.FeedManager;
 public class FeedSearch extends Fragment {
 
     private Context context;
-    private LinkedList<FeedItem> feedList = new LinkedList<>(), feedListFiltered = new LinkedList<>();
+    private static LinkedList<FeedItem> feedList = new LinkedList<>(), feedListFiltered = new LinkedList<>();
     private FeedAdapter feedAdapter;
 
     public FeedSearch() {
