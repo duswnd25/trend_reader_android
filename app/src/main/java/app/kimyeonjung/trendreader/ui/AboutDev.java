@@ -2,8 +2,11 @@ package app.kimyeonjung.trendreader.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
@@ -12,7 +15,7 @@ import com.vansuita.materialabout.views.AboutView;
 
 import app.kimyeonjung.trendreader.R;
 
-public class  AboutDev extends AppCompatActivity {
+public class AboutDev extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,10 +23,9 @@ public class  AboutDev extends AppCompatActivity {
 
         setContentView(R.layout.activity_about_dev);
 
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        Toolbar toolbar = findViewById(R.id.about_dev_toolbar);
+        toolbar.setTitle(getString(R.string.title_activity_about_dev));
+        toolbar.setNavigationOnClickListener(v -> finish());
 
         AboutBuilder builder = AboutBuilder.with(this)
                 .setAppIcon(R.mipmap.ic_launcher)
@@ -54,7 +56,7 @@ public class  AboutDev extends AppCompatActivity {
 
         AboutView aboutView = builder.build();
 
-        ((FrameLayout)findViewById(R.id.about_container)).addView(aboutView);
+        ((FrameLayout) findViewById(R.id.about_container)).addView(aboutView);
     }
 
     @Override

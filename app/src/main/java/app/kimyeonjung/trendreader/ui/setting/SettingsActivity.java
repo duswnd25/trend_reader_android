@@ -3,7 +3,11 @@ package app.kimyeonjung.trendreader.ui.setting;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import app.kimyeonjung.trendreader.R;
 import app.kimyeonjung.trendreader.ui.setting.AppCompatPreferenceActivity;
@@ -13,8 +17,12 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setupActionBar();
         addPreferencesFromResource(R.xml.pref_setting);
+
+        LinearLayout root = (LinearLayout)findViewById(android.R.id.list).getParent().getParent().getParent();
+        Toolbar bar = (Toolbar) LayoutInflater.from(this).inflate(R.layout.settings_toolbar, root, false);
+        root.addView(bar, 0); // insert at top
+        bar.setNavigationOnClickListener(v -> finish());
 
         initClickListener();
     }
@@ -27,14 +35,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 return false;
             }
         });
-    }
-
-    private void setupActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            // Show the Up button in the action bar.
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
     }
 
     @Override

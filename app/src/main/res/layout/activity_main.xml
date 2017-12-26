@@ -11,6 +11,7 @@
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize">
@@ -25,7 +26,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
-                    app:navigationIcon="?homeAsUpIndicator" />
+                    app:navigationIcon="?homeAsUpIndicator"
+                    app:theme="@style/AppTheme.ToolBarStyle" />
             </android.support.design.widget.CollapsingToolbarLayout>
         </android.support.design.widget.AppBarLayout>
 

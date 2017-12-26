@@ -1,10 +1,12 @@
 package app.kimyeonjung.trendreader.ui.feed;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
@@ -34,11 +36,16 @@ public class DetailView extends AppCompatActivity implements View.OnClickListene
 
         Toolbar toolbar = findViewById(R.id.detail_toolbar);
         toolbar.setTitle(intent.getStringExtra(Const.INTENT.BLOG_NAME));
+        toolbar.setNavigationOnClickListener(v -> finish());
 
         initView(toolbar);
     }
 
     private void initView(Toolbar toolbar) {
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean isPaletteUse = prefs.getBoolean(getString(R.string.pref_feed_palette_use), true);
+
         String blogTitle = intent.getStringExtra(Const.INTENT.BLOG_NAME);
         String faviconUrl = intent.getStringExtra(Const.INTENT.FAVICON_URL);
         String postTitle = intent.getStringExtra(Const.INTENT.POST_TITLE);
@@ -54,15 +61,14 @@ public class DetailView extends AppCompatActivity implements View.OnClickListene
                     @Override
                     public void onResourceReady(Bitmap bitmap, GlideAnimation anim) {
                         super.onResourceReady(bitmap, anim);
-                        /*
+
                         if (isPaletteUse) {
                             Palette palette = Palette.from(bitmap).generate();
                             Palette.Swatch vibrantSwatch = palette.getVibrantSwatch();
                             if (vibrantSwatch != null) {
-                                holder.descriptionContainer.setBackgroundColor(vibrantSwatch.getRgb());
-                                holder.description.setTextColor(vibrantSwatch.getBodyTextColor());
+
                             }
-                        }*/
+                        }
                     }
                 });
 
