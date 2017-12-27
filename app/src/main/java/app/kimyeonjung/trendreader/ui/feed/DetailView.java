@@ -3,11 +3,17 @@ package app.kimyeonjung.trendreader.ui.feed;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -18,7 +24,7 @@ import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import app.kimyeonjung.trendreader.R;
 import app.kimyeonjung.trendreader.core.Const;
 
-public class DetailView extends AppCompatActivity implements View.OnClickListener {
+public class DetailView extends AppCompatActivity {
     private Intent intent;
 
     @Override
@@ -29,24 +35,21 @@ public class DetailView extends AppCompatActivity implements View.OnClickListene
         intent = getIntent();
 
         Toolbar toolbar = findViewById(R.id.detail_toolbar);
-        toolbar.setTitle(intent.getStringExtra(Const.INTENT.BLOG_NAME));
-        toolbar.setNavigationOnClickListener(v -> finish());
+        toolbar.setTitle(intent.getStringExtra(Const.INTENT.POST_TITLE));
+        setSupportActionBar(toolbar);
 
-        initView(toolbar);
+        initView();
     }
 
-    private void initView(Toolbar toolbar) {
+    private void initView() {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         boolean isPaletteUse = prefs.getBoolean(getString(R.string.pref_feed_palette_use), true);
 
-        String blogTitle = intent.getStringExtra(Const.INTENT.BLOG_NAME);
         String faviconUrl = intent.getStringExtra(Const.INTENT.FAVICON_URL);
-        String postTitle = intent.getStringExtra(Const.INTENT.POST_TITLE);
         String postContent = intent.getStringExtra(Const.INTENT.POST_CONTENT);
         String postUrl = intent.getStringExtra(Const.INTENT.POST_URL);
 
-        toolbar.setTitle(postTitle);
         ((TextView) findViewById(R.id.detail_text)).setText(postContent);
 
         Glide.with(this).load(faviconUrl).asBitmap()
@@ -70,9 +73,18 @@ public class DetailView extends AppCompatActivity implements View.OnClickListene
     }
 
     @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
         }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.detail_menu, menu);
+        return true;
     }
 }

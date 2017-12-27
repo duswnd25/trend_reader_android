@@ -8,6 +8,8 @@
     <!-- Menu -->
     <string name="preference">사용자 설정</string>
     <string name="action_settings">설정</string>
+    <string name="action_bookmark">북마크</string>
+    <string name="action_detail">상세보기</string>
 
     <!-- Title -->
     <string name="title_feed_all">전체 피드</string>
@@ -19,6 +21,7 @@
 
     <!-- 상세보기 -->
     <string name="detail_image">상세보기 이미지</string>
+    <string name="detail_bookmark">북마크</string>
 
     <!-- 피드 -->
     <string name="feed_image">피드 이미지</string>

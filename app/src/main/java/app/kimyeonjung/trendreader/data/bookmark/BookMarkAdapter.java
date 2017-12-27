@@ -20,7 +20,6 @@ import java.util.LinkedList;
 
 import app.kimyeonjung.trendreader.R;
 import app.kimyeonjung.trendreader.data.feed.FeedItem;
-import me.grantland.widget.AutofitTextView;
 
 public class BookMarkAdapter extends RecyclerView.Adapter<BookMarkAdapter.ViewHolder> {
 
@@ -75,7 +74,7 @@ public class BookMarkAdapter extends RecyclerView.Adapter<BookMarkAdapter.ViewHo
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        private AutofitTextView title;
+        private TextView title;
         private TextView description;
         private ImageView profile;
         private LinearLayout descriptionContainer;
