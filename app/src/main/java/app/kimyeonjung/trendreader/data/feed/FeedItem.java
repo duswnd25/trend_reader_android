@@ -4,7 +4,7 @@ import java.util.Date;
 
 import io.realm.RealmObject;
 
-public class FeedItem extends RealmObject{
+public class FeedItem extends RealmObject {
 
     private String blogTag, faviconUrl, blogName, blogUrl, postTitle, postUrl, postContent;
     private Date updateAt;

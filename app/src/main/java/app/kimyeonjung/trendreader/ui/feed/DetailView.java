@@ -26,6 +26,7 @@ import app.kimyeonjung.trendreader.core.Const;
 
 public class DetailView extends AppCompatActivity {
     private Intent intent;
+    private String postUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +49,7 @@ public class DetailView extends AppCompatActivity {
 
         String faviconUrl = intent.getStringExtra(Const.INTENT.FAVICON_URL);
         String postContent = intent.getStringExtra(Const.INTENT.POST_CONTENT);
-        String postUrl = intent.getStringExtra(Const.INTENT.POST_URL);
+        postUrl = intent.getStringExtra(Const.INTENT.POST_URL);
 
         ((TextView) findViewById(R.id.detail_text)).setText(postContent);
 
@@ -77,6 +78,11 @@ public class DetailView extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
+                break;
+            case R.id.action_bookmark:
+                break;
+            case R.id.action_link:
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(postUrl)));
                 break;
         }
         return super.onOptionsItemSelected(item);
