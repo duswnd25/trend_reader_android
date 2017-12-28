@@ -9,7 +9,8 @@
     <string name="preference">사용자 설정</string>
     <string name="action_settings">설정</string>
     <string name="action_bookmark">북마크</string>
-    <string name="action_bookmark_save">북마크</string>
+    <string name="action_bookmark_save">북마크 저장</string>
+    <string name="action_bookmark_remove">북마크 제거</string>
     <string name="action_detail">상세보기</string>
 
     <!-- Title -->
