@@ -8,7 +8,7 @@ public class Const {
     }
 
     public static class DB {
-        public static final String BOOK_MAKR = "bookmark.realm";
+
 
         public static RealmConfiguration getBookMarkConfig() {
             return new RealmConfiguration.Builder()
