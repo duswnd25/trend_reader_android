@@ -40,7 +40,6 @@ public class FeedBookMark extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.d("테스트", "onResume");
         initData();
     }
 
@@ -82,13 +81,11 @@ public class FeedBookMark extends Fragment {
     }
 
     private void initData() {
-
         try (Realm realm = Realm.getInstance(Const.DB.getBookMarkConfig())) {
-            bookMarkList.clear();
+            realm.refresh();
             RealmQuery<FeedItem> query = realm.where(FeedItem.class);
             RealmResults<FeedItem> temp = query.findAll();
             bookMarkList = realm.copyFromRealm(temp);
-        } finally {
             feedAdapter.notifyDataSetChanged();
         }
     }

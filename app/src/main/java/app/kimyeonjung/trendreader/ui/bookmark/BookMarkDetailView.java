@@ -63,6 +63,7 @@ public class BookMarkDetailView extends AppCompatActivity {
                     realm.beginTransaction();
                     temp.deleteFromRealm();
                     realm.commitTransaction();
+                    realm.waitForChange();
                 }
             } else {
                 realm.beginTransaction();
@@ -75,6 +76,7 @@ public class BookMarkDetailView extends AppCompatActivity {
                 feed.setPostUrl(feedItem.getPostUrl());
                 feed.setUpdateAt(feedItem.getUpdateAt());
                 realm.commitTransaction();
+                realm.waitForChange();
             }
 
             new StyleableToast
@@ -99,6 +101,7 @@ public class BookMarkDetailView extends AppCompatActivity {
                 break;
             case R.id.action_bookmark:
                 changeBookMarkState();
+                finish();
                 break;
             case R.id.action_link:
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(feedItem.getPostUrl())));
