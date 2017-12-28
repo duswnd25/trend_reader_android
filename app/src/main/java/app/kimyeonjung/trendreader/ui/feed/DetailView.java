@@ -1,35 +1,29 @@
 package app.kimyeonjung.trendreader.ui.feed;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
-
-import java.util.Date;
 
 import app.kimyeonjung.trendreader.R;
 import app.kimyeonjung.trendreader.core.Const;
 import app.kimyeonjung.trendreader.data.FeedItem;
 import io.realm.Realm;
+import io.realm.RealmQuery;
 
 public class DetailView extends AppCompatActivity {
     private FeedItem feedItem;
+    private boolean isBookMarked = false;
+    private MenuItem bookMarkItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,58 +42,63 @@ public class DetailView extends AppCompatActivity {
         toolbar.setTitle(feedItem.getPostTitle());
         setSupportActionBar(toolbar);
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean isPaletteUse = prefs.getBoolean(getString(R.string.pref_feed_palette_use), true);
-
         ((TextView) findViewById(R.id.detail_text)).setText(feedItem.getPostContent());
 
-        Glide.with(this).load(feedItem.getFaviconUrl()).asBitmap()
-                .centerCrop().placeholder(R.mipmap.ic_launcher_round)
-                .into(new BitmapImageViewTarget(findViewById(R.id.detail_favicon)) {
-                    @Override
-                    public void onResourceReady(Bitmap bitmap, GlideAnimation anim) {
-                        super.onResourceReady(bitmap, anim);
-
-                        if (isPaletteUse) {
-                            Palette palette = Palette.from(bitmap).generate();
-                            Palette.Swatch vibrantSwatch = palette.getVibrantSwatch();
-                            if (vibrantSwatch != null) {
-
-                            }
-                        }
-                    }
-                });
-
-
+        Glide.with(this)
+                .load(feedItem.getFaviconUrl())
+                .centerCrop()
+                .placeholder(R.mipmap.ic_launcher_round)
+                .into((ImageView) findViewById(R.id.detail_favicon));
     }
 
-    private void addBookMark() {
+    private void changeBookMarkState() {
 
         try (Realm realm = Realm.getInstance(Const.DB.getBookMarkConfig())) {
 
-            realm.beginTransaction();
-
-            FeedItem feed = realm.createObject(FeedItem.class);
-            feed = realm.copyToRealm(feedItem);
-            realm.commitTransaction();
+            if (isBookMarked) {
+                RealmQuery<FeedItem> query = realm.where(FeedItem.class);
+                query.equalTo("postUrl", feedItem.getPostUrl());
+                FeedItem temp = query.findFirst();
+                if (temp != null) {
+                    realm.beginTransaction();
+                    temp.deleteFromRealm();
+                    realm.commitTransaction();
+                }
+            } else {
+                realm.beginTransaction();
+                FeedItem feed = realm.createObject(FeedItem.class);
+                feed.setBlogName(feedItem.getBlogName());
+                feed.setBlogUrl(feedItem.getBlogUrl());
+                feed.setFaviconUrl(feedItem.getFaviconUrl());
+                feed.setPostContent(feedItem.getPostContent());
+                feed.setPostTitle(feedItem.getPostTitle());
+                feed.setPostUrl(feedItem.getPostUrl());
+                feed.setUpdateAt(feedItem.getUpdateAt());
+                realm.commitTransaction();
+            }
 
             new StyleableToast
                     .Builder(this)
-                    .text(getString(R.string.action_bookmark_save))
                     .textColor(Color.WHITE)
                     .backgroundColor(getResources().getColor(R.color.colorPrimary))
+                    .iconResLeft(isBookMarked ? R.drawable.ic_bookmark_remove_fill : R.drawable.ic_bookmark_fill)
+                    .text(isBookMarked ? getString(R.string.action_bookmark_remove) : getString(R.string.action_bookmark_save))
                     .show();
+
+            isBookMarked = !isBookMarked;
+            changeBookMarkIcon();
         }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 break;
             case R.id.action_bookmark:
-                addBookMark();
+                changeBookMarkState();
                 break;
             case R.id.action_link:
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(feedItem.getPostUrl())));
@@ -110,12 +109,34 @@ public class DetailView extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
         getMenuInflater().inflate(R.menu.detail_menu, menu);
+        /*
+        색상필터
         for (int index = 0; index < menu.size(); index++) {
             Drawable icon = menu.getItem(index).getIcon();
             icon.mutate();
             icon.setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         }
+        */
+        bookMarkItem = menu.getItem(0);
         return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        // 북마크 여부에 따른 초기 아이콘 변경
+        try (Realm realm = Realm.getInstance(Const.DB.getBookMarkConfig())) {
+            RealmQuery<FeedItem> query = realm.where(FeedItem.class);
+            query.equalTo("postUrl", feedItem.getPostUrl());
+            isBookMarked = query.count() != 0;
+            changeBookMarkIcon();
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    private void changeBookMarkIcon() {
+        // 북마크 여부에 따라 변경
+        bookMarkItem.setIcon(isBookMarked ? R.drawable.ic_bookmark_fill : R.drawable.ic_bookmark);
     }
 }
