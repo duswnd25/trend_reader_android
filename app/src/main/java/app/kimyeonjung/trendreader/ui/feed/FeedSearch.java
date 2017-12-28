@@ -24,9 +24,9 @@ import java.util.LinkedList;
 
 import app.kimyeonjung.trendreader.R;
 import app.kimyeonjung.trendreader.core.Const;
-import app.kimyeonjung.trendreader.data.feed.FeedItem;
-import app.kimyeonjung.trendreader.data.feed.fetch.FeedAdapter;
-import app.kimyeonjung.trendreader.data.feed.fetch.FeedManager;
+import app.kimyeonjung.trendreader.data.FeedItem;
+import app.kimyeonjung.trendreader.data.feed.FeedAdapter;
+import app.kimyeonjung.trendreader.data.feed.FeedManager;
 
 public class FeedSearch extends Fragment {
 

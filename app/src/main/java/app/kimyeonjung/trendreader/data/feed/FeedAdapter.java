@@ -1,4 +1,4 @@
-package app.kimyeonjung.trendreader.data.feed.fetch;
+package app.kimyeonjung.trendreader.data.feed;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -22,7 +22,7 @@ import java.util.LinkedList;
 
 import app.kimyeonjung.trendreader.R;
 import app.kimyeonjung.trendreader.core.Const;
-import app.kimyeonjung.trendreader.data.feed.FeedItem;
+import app.kimyeonjung.trendreader.data.FeedItem;
 import app.kimyeonjung.trendreader.ui.feed.DetailView;
 
 public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
@@ -51,11 +51,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         // Container
         holder.container.setOnClickListener(view -> {
             Intent intent = new Intent(context, DetailView.class);
-            intent.putExtra(Const.INTENT.BLOG_NAME, temp.getBlogName());
-            intent.putExtra(Const.INTENT.FAVICON_URL, temp.getFaviconUrl());
-            intent.putExtra(Const.INTENT.POST_TITLE, temp.getPostTitle());
-            intent.putExtra(Const.INTENT.POST_CONTENT, temp.getPostContent());
-            intent.putExtra(Const.INTENT.POST_URL, temp.getPostUrl());
+            intent.putExtra(Const.INTENT.POST_DATA, temp);
             context.startActivity(intent);
         });
 

@@ -1,19 +1,24 @@
 package app.kimyeonjung.trendreader.core;
 
+import io.realm.RealmConfiguration;
+
 public class Const {
     public class API_URL {
         public static final String ALL = "https://trendreader.herokuapp.com/api/data/read/blog/all";
     }
 
-    public class DB {
+    public static class DB {
         public static final String BOOK_MAKR = "bookmark.realm";
+
+        public static RealmConfiguration getBookMarkConfig() {
+            return new RealmConfiguration.Builder()
+                    .name("bookmark.realm")
+                    .schemaVersion(1)
+                    .build();
+        }
     }
 
     public class INTENT {
-        public static final String BLOG_NAME = "blog_name";
-        public static final String POST_URL = "post_url";
-        public static final String POST_CONTENT = "post_content";
-        public static final String FAVICON_URL = "favicon_url";
-        public static final String POST_TITLE = "post_title";
+        public static final String POST_DATA = "blog_name";
     }
 }

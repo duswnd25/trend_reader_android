@@ -29,10 +29,12 @@
             android:label="@string/title_setting" />
         <activity
             android:name=".ui.feed.DetailView"
-            android:label="@string/title_activity_detail_view" />
+            android:label="@string/title_feed_detail" />
+        <activity android:name=".ui.bookmark.BookMarkDetailView"
+            android:label="@string/title_feed_book_mark"/>
         <activity
             android:name=".ui.AboutDev"
-            android:label="@string/title_activity_about_dev" />
+            android:label="@string/title_about_dev" />
     </application>
 
 </manifest>

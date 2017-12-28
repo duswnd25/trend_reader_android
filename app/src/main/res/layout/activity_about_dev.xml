@@ -16,7 +16,7 @@
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="?attr/homeAsUpIndicator"
             app:theme="@style/AppTheme.ToolBarStyle"
-            app:title="@string/title_activity_about_dev" />
+            app:title="@string/title_about_dev" />
     </android.support.design.widget.AppBarLayout>
 
     <FrameLayout

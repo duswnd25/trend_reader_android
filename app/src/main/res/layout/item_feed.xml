@@ -5,10 +5,9 @@
     android:id="@+id/feed_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/interval_4"
+    android:layout_margin="@dimen/default_padding_quarter"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardBackgroundColor="@android:color/white"
-    app:cardUseCompatPadding="true"
     app:cardCornerRadius="@dimen/card_radius">
 
     <LinearLayout
@@ -26,15 +25,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/white"
+                android:contentDescription="@string/feed_image"
                 android:scaleType="centerCrop"
-                tools:src="@drawable/ic_launcher_background"
-                android:contentDescription="@string/feed_image" />
+                tools:src="@drawable/ic_launcher_background" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:background="@drawable/shadow" />
+                android:background="@drawable/shadow"
+                android:scaleType="centerCrop" />
 
             <TextView
                 android:id="@+id/feed_title"
@@ -45,14 +44,14 @@
                 android:fadingEdge="horizontal"
                 android:gravity="center"
                 android:marqueeRepeatLimit="marquee_forever"
-                android:paddingEnd="@dimen/interval_4"
-                android:paddingStart="@dimen/interval_4"
+                android:paddingEnd="@dimen/default_padding_quarter"
+                android:paddingStart="@dimen/default_padding_quarter"
                 android:scrollHorizontally="true"
+                android:singleLine="true"
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/feed_title"
-                tools:text="제목"
-                android:singleLine="true" />
+                tools:text="제목" />
         </FrameLayout>
 
         <LinearLayout
@@ -60,12 +59,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/interval_8">
+            android:padding="@dimen/default_padding_half">
 
             <TextView
                 android:id="@+id/feed_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="@dimen/default_padding_half"
                 android:textColor="@android:color/black"
                 tools:text="내용" />
         </LinearLayout>

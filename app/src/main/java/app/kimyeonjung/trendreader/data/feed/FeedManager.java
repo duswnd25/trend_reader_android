@@ -1,4 +1,4 @@
-package app.kimyeonjung.trendreader.data.feed.fetch;
+package app.kimyeonjung.trendreader.data.feed;
 
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
@@ -14,7 +14,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 
 import app.kimyeonjung.trendreader.core.Utils;
-import app.kimyeonjung.trendreader.data.feed.FeedItem;
+import app.kimyeonjung.trendreader.data.FeedItem;
 
 public class FeedManager {
     private OnFinishCallback callback;

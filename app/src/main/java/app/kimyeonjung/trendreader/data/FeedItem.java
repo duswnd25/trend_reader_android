@@ -1,23 +1,16 @@
-package app.kimyeonjung.trendreader.data.feed;
+package app.kimyeonjung.trendreader.data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import io.realm.RealmObject;
 
-public class FeedItem extends RealmObject {
+public class FeedItem extends RealmObject implements Serializable {
 
-    private String blogTag, faviconUrl, blogName, blogUrl, postTitle, postUrl, postContent;
+    private String faviconUrl, blogName, blogUrl, postTitle, postUrl, postContent;
     private Date updateAt;
 
     public FeedItem() {
-    }
-
-    public String getBlogTag() {
-        return blogTag;
-    }
-
-    public void setBlogTag(String blogTag) {
-        this.blogTag = blogTag;
     }
 
     public String getFaviconUrl() {
@@ -77,6 +70,6 @@ public class FeedItem extends RealmObject {
     }
 
     public String getAll() {
-        return blogTag + blogName + postTitle + postContent;
+        return blogName + postTitle + postContent;
     }
 }

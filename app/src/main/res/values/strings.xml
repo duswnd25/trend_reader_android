@@ -9,6 +9,7 @@
     <string name="preference">사용자 설정</string>
     <string name="action_settings">설정</string>
     <string name="action_bookmark">북마크</string>
+    <string name="action_bookmark_save">북마크</string>
     <string name="action_detail">상세보기</string>
 
     <!-- Title -->
@@ -16,8 +17,9 @@
     <string name="title_feed_trend">트렌드</string>
     <string name="title_feed_book_mark">북마크</string>
     <string name="title_setting">설정</string>
-    <string name="title_activity_about_dev">About Me</string>
-    <string name="title_activity_detail_view">상세보기</string>
+    <string name="title_about_dev">About Me</string>
+    <string name="title_feed_detail">피드 상세보기</string>
+    <string name="title_bookmark_detail">북마크 상세보기</string>
 
     <!-- 상세보기 -->
     <string name="detail_image">상세보기 이미지</string>

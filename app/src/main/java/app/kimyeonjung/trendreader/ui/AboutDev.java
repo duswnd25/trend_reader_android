@@ -21,7 +21,7 @@ public class AboutDev extends AppCompatActivity {
         setContentView(R.layout.activity_about_dev);
 
         Toolbar toolbar = findViewById(R.id.about_dev_toolbar);
-        toolbar.setTitle(getString(R.string.title_activity_about_dev));
+        toolbar.setTitle(getString(R.string.title_about_dev));
         toolbar.setNavigationOnClickListener(v -> finish());
 
         AboutBuilder builder = AboutBuilder.with(this)
