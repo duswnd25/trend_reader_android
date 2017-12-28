@@ -69,13 +69,13 @@ public class MainActivity extends AppCompatActivity
                     false);
             switch (position) {
                 case 0:
-                    icon.setImageDrawable(res.getDrawable(R.drawable.ic_search_white));
+                    icon.setImageDrawable(res.getDrawable(R.drawable.ic_search));
                     break;
                 case 1:
-                    icon.setImageDrawable(res.getDrawable(R.drawable.ic_chart_white));
+                    icon.setImageDrawable(res.getDrawable(R.drawable.ic_chart));
                     break;
                 case 2:
-                    icon.setImageDrawable(res.getDrawable(R.drawable.ic_cabinet_white));
+                    icon.setImageDrawable(res.getDrawable(R.drawable.ic_cabinet));
                     break;
                 default:
                     throw new IllegalStateException("Invalid position: " + position);

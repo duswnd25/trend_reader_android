@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_bookmark"
-        android:icon="@drawable/ic_bookmark_white"
+        android:icon="@drawable/ic_bookmark"
         android:orderInCategory="100"
         android:title="@string/action_bookmark"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_link"
-        android:icon="@drawable/ic_link_white"
+        android:icon="@drawable/ic_link"
         android:orderInCategory="100"
         android:title="@string/action_detail"
         app:showAsAction="always" />

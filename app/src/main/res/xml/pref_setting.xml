@@ -2,13 +2,13 @@
 
     <app.kimyeonjung.trendreader.core.NumberPickerPreference
         android:defaultValue="2"
-        android:icon="@drawable/ic_grid_black"
+        android:icon="@drawable/ic_grid"
         android:key="@string/pref_feed_col_num"
         android:title="@string/pref_feed_col_num_des" />
 
     <SwitchPreference
         android:defaultValue="true"
-        android:icon="@drawable/ic_palette_black"
+        android:icon="@drawable/ic_palette"
         android:key="@string/pref_feed_palette_use"
         android:title="@string/pref_feed_palette_use_des" />
 </PreferenceScreen>
