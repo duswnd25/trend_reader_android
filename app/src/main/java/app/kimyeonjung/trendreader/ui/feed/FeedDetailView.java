@@ -20,7 +20,7 @@ import app.kimyeonjung.trendreader.data.FeedItem;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 
-public class DetailView extends AppCompatActivity {
+public class FeedDetailView extends AppCompatActivity {
     private FeedItem feedItem;
     private boolean isBookMarked = false;
     private MenuItem bookMarkItem;

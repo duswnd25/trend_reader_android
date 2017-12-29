@@ -20,8 +20,9 @@ import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
 import app.kimyeonjung.trendreader.R;
-import app.kimyeonjung.trendreader.ui.bookmark.FeedBookMark;
+import app.kimyeonjung.trendreader.ui.feed.FeedBookMark;
 import app.kimyeonjung.trendreader.ui.feed.FeedSearch;
+import app.kimyeonjung.trendreader.ui.feed.FeedTrend;
 import app.kimyeonjung.trendreader.ui.setting.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity

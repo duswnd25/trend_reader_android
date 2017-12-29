@@ -28,10 +28,8 @@
             android:name=".ui.setting.SettingsActivity"
             android:label="@string/title_setting" />
         <activity
-            android:name=".ui.feed.DetailView"
+            android:name=".ui.feed.FeedDetailView"
             android:label="@string/title_feed_detail" />
-        <activity android:name=".ui.bookmark.BookMarkDetailView"
-            android:label="@string/title_feed_book_mark"/>
         <activity
             android:name=".ui.AboutDev"
             android:label="@string/title_about_dev" />

@@ -23,7 +23,7 @@ import java.util.LinkedList;
 import app.kimyeonjung.trendreader.R;
 import app.kimyeonjung.trendreader.core.Const;
 import app.kimyeonjung.trendreader.data.FeedItem;
-import app.kimyeonjung.trendreader.ui.feed.DetailView;
+import app.kimyeonjung.trendreader.ui.feed.FeedDetailView;
 
 public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
 
@@ -50,7 +50,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
 
         // Container
         holder.container.setOnClickListener(view -> {
-            Intent intent = new Intent(context, DetailView.class);
+            Intent intent = new Intent(context, FeedDetailView.class);
             intent.putExtra(Const.INTENT.POST_DATA, temp);
             context.startActivity(intent);
         });

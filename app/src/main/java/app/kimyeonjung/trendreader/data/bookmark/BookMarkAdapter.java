@@ -20,7 +20,7 @@ import java.util.List;
 import app.kimyeonjung.trendreader.R;
 import app.kimyeonjung.trendreader.core.Const;
 import app.kimyeonjung.trendreader.data.FeedItem;
-import app.kimyeonjung.trendreader.ui.bookmark.BookMarkDetailView;
+import app.kimyeonjung.trendreader.ui.feed.FeedDetailView;
 
 public class BookMarkAdapter extends RecyclerView.Adapter<BookMarkAdapter.ViewHolder> {
 
@@ -47,7 +47,7 @@ public class BookMarkAdapter extends RecyclerView.Adapter<BookMarkAdapter.ViewHo
         Glide.with(context).load(temp.getFaviconUrl()).centerCrop().into(holder.profile);
 
         holder.container.setOnClickListener(view -> {
-            Intent intent = new Intent(context, BookMarkDetailView.class);
+            Intent intent = new Intent(context, FeedDetailView.class);
             intent.putExtra(Const.INTENT.POST_DATA, temp);
             context.startActivity(intent);
         });

@@ -1,14 +1,13 @@
-package app.kimyeonjung.trendreader.ui;
+package app.kimyeonjung.trendreader.ui.feed;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,29 +17,30 @@ import android.view.ViewGroup;
 import com.cooltechworks.views.shimmer.ShimmerRecyclerView;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import app.kimyeonjung.trendreader.R;
 import app.kimyeonjung.trendreader.core.Const;
+import app.kimyeonjung.trendreader.data.bookmark.BookMarkAdapter;
 import app.kimyeonjung.trendreader.data.FeedItem;
-import app.kimyeonjung.trendreader.data.feed.FeedAdapter;
-import app.kimyeonjung.trendreader.data.feed.FeedManager;
+import io.realm.Realm;
+import io.realm.RealmQuery;
+import io.realm.RealmResults;
 
-public class FeedTrend extends Fragment {
+public class FeedBookMark extends Fragment {
 
-    private Context context;
-    private LinkedList<FeedItem> feedList = new LinkedList<>();
-    private FeedAdapter feedAdapter;
+    private List<FeedItem> bookMarkList = new LinkedList<>();
+    private BookMarkAdapter feedAdapter;
 
-    public FeedTrend() {
+    public FeedBookMark() {
 
-        setHasOptionsMenu(true);
+        setHasOptionsMenu(false);
     }
 
     @Override
-    public void onAttach(Context context) {
-
-        super.onAttach(context);
-        this.context = context;
+    public void onResume() {
+        super.onResume();
+        initData();
     }
 
     @Override
@@ -61,21 +61,13 @@ public class FeedTrend extends Fragment {
 
         super.onViewCreated(view, savedInstanceState);
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        boolean isPaletteUse = prefs.getBoolean(getString(R.string.pref_feed_palette_use), false);
-        int staggerColSize = prefs.getInt(getString(R.string.pref_feed_col_num), 2);
-
-        feedAdapter = new FeedAdapter(getContext(), isPaletteUse, feedList);
-
-        initView(view, staggerColSize);
-        initData(view);
-    }
-
-    private void initView(View view, int staggerColSize) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        int staggerColSize = prefs.getInt(getString(R.string.pref_feed_col_num), 1);
 
         // StaggerGridLayout
         StaggeredGridLayoutManager feedLayoutManager = new StaggeredGridLayoutManager(staggerColSize, StaggeredGridLayoutManager.VERTICAL);
         feedLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS);
+        feedAdapter = new BookMarkAdapter(getContext(), bookMarkList);
 
         // RecyclerView
         ShimmerRecyclerView feedView = view.findViewById(R.id.fragment_recycler_view);
@@ -85,25 +77,16 @@ public class FeedTrend extends Fragment {
         feedView.setLayoutManager(feedLayoutManager);
         feedView.setAdapter(feedAdapter);
 
-        // Scroll Change Listener
-        feedView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-            }
-        });
+        initData();
     }
 
-    private void initData(View view) {
-
-        new FeedManager().fetchFeed(Const.API_URL.ALL, result -> {
-            feedList.addAll(result);
+    private void initData() {
+        try (Realm realm = Realm.getInstance(Const.DB.getBookMarkConfig())) {
+            realm.refresh();
+            RealmQuery<FeedItem> query = realm.where(FeedItem.class);
+            RealmResults<FeedItem> temp = query.findAll();
+            bookMarkList = realm.copyFromRealm(temp);
             feedAdapter.notifyDataSetChanged();
-        });
+        }
     }
 }
