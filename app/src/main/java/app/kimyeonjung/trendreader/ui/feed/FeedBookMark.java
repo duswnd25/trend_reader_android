@@ -1,6 +1,5 @@
 package app.kimyeonjung.trendreader.ui.feed;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -8,7 +7,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,10 +21,10 @@ import java.util.List;
 
 import app.kimyeonjung.trendreader.R;
 import app.kimyeonjung.trendreader.core.Const;
-import app.kimyeonjung.trendreader.data.bookmark.BookMarkAdapter;
 import app.kimyeonjung.trendreader.data.FeedItem;
-import app.kimyeonjung.trendreader.data.otto.BookMarkEvent;
-import app.kimyeonjung.trendreader.data.otto.BusProvider;
+import app.kimyeonjung.trendreader.data.bookmark.BookMarkAdapter;
+import app.kimyeonjung.trendreader.core.otto.BookMarkEvent;
+import app.kimyeonjung.trendreader.core.otto.BusProvider;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;

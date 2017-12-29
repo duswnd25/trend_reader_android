@@ -35,33 +35,28 @@ public class FeedSearch extends Fragment {
     private FeedAdapter feedAdapter;
 
     public FeedSearch() {
-
         setHasOptionsMenu(true);
     }
 
     @Override
     public void onAttach(Context context) {
-
         super.onAttach(context);
         this.context = context;
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-
         inflater.inflate(R.menu.search_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         return inflater.inflate(R.layout.fragment_recycler, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
         super.onViewCreated(view, savedInstanceState);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -74,18 +69,14 @@ public class FeedSearch extends Fragment {
     }
 
     private void initView(View view, int staggerColSize) {
-
         // RecyclerView
         ShimmerRecyclerView feedView = view.findViewById(R.id.fragment_recycler_view);
-
         // Scroll Up to Top
         FloatingActionButton upToTopButton = view.findViewById(R.id.fragment_recycler_up_to_top);
         upToTopButton.setOnClickListener(view1 -> feedView.smoothScrollToPosition(0));
-
         // StaggerGridLayout
         StaggeredGridLayoutManager feedLayoutManager = new StaggeredGridLayoutManager(staggerColSize, StaggeredGridLayoutManager.VERTICAL);
         feedLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS);
-
         // Recycler Attribute
         feedView.setGridChildCount(staggerColSize);
         feedView.setNestedScrollingEnabled(true);
@@ -102,7 +93,6 @@ public class FeedSearch extends Fragment {
                 }
             }
         });
-
         // init data
         feedListFiltered.clear();
         new FeedManager().fetchFeed(Const.API_URL.ALL, result -> {
@@ -112,12 +102,10 @@ public class FeedSearch extends Fragment {
             feedView.setAdapter(feedAdapter);
             feedAdapter.notifyDataSetChanged();
         });
-
     }
 
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
-
         MenuItem mSearchMenuItem = menu.findItem(R.id.menu_search);
         SearchView searchView = (SearchView) mSearchMenuItem.getActionView();
         searchView.setIconified(false);

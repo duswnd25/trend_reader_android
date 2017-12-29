@@ -1,4 +1,4 @@
-package app.kimyeonjung.trendreader.core;
+package app.kimyeonjung.trendreader.core.tab;
 
 import android.content.Context;
 import android.content.res.ColorStateList;

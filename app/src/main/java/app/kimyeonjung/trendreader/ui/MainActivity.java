@@ -22,7 +22,6 @@ import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 import app.kimyeonjung.trendreader.R;
 import app.kimyeonjung.trendreader.ui.feed.FeedBookMark;
 import app.kimyeonjung.trendreader.ui.feed.FeedSearch;
-import app.kimyeonjung.trendreader.ui.feed.FeedTrend;
 import app.kimyeonjung.trendreader.ui.setting.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity
@@ -30,8 +29,8 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = findViewById(R.id.main_toolbar);
@@ -49,11 +48,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void initTabView() {
-
         FragmentPagerItemAdapter tabAdapter = new FragmentPagerItemAdapter(
                 getSupportFragmentManager(), FragmentPagerItems.with(this)
                 .add(R.string.title_feed_all, FeedSearch.class)
-                .add(R.string.title_feed_trend, FeedTrend.class)
                 .add(R.string.title_feed_book_mark, FeedBookMark.class)
                 .create());
 
@@ -73,9 +70,6 @@ public class MainActivity extends AppCompatActivity
                     icon.setImageDrawable(res.getDrawable(R.drawable.ic_search));
                     break;
                 case 1:
-                    icon.setImageDrawable(res.getDrawable(R.drawable.ic_chart));
-                    break;
-                case 2:
                     icon.setImageDrawable(res.getDrawable(R.drawable.ic_cabinet));
                     break;
                 default:
@@ -83,13 +77,11 @@ public class MainActivity extends AppCompatActivity
             }
             return icon;
         });
-
         viewPagerTab.setViewPager(viewPager);
     }
 
     @Override
     public void onBackPressed() {
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);

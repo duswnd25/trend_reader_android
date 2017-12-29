@@ -1,4 +1,4 @@
-package app.kimyeonjung.trendreader.data.otto;
+package app.kimyeonjung.trendreader.core.otto;
 
 import com.squareup.otto.Bus;
 

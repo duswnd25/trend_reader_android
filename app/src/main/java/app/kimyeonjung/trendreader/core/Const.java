@@ -8,8 +8,6 @@ public class Const {
     }
 
     public static class DB {
-
-
         public static RealmConfiguration getBookMarkConfig() {
             return new RealmConfiguration.Builder()
                     .name("bookmark.realm")

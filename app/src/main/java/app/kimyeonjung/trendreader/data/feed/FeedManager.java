@@ -20,13 +20,11 @@ public class FeedManager {
     private OnFinishCallback callback;
 
     public void fetchFeed(String requestUrl, OnFinishCallback callback) {
-
         this.callback = callback;
         new FeedFetcher().execute(requestUrl);
     }
 
     public interface OnFinishCallback {
-
         void done(LinkedList<FeedItem> result);
     }
 
@@ -38,13 +36,11 @@ public class FeedManager {
 
         @Override
         protected void onPreExecute() {
-
             super.onPreExecute();
         }
 
         @Override
         protected void onPostExecute(LinkedList<FeedItem> result) {
-
             super.onPostExecute(result);
             Collections.sort(result, (f1, f2) -> f2.getUpdateAt().compareTo(f1.getUpdateAt()));
             callback.done(result);
@@ -57,7 +53,6 @@ public class FeedManager {
 
         @Override
         protected LinkedList<FeedItem> doInBackground(String... params) {
-
             LinkedList<FeedItem> feedList = new LinkedList<>();
             try {
                 OkHttpClient client = new OkHttpClient();

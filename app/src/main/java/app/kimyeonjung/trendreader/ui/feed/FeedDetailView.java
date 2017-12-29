@@ -17,8 +17,8 @@ import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import app.kimyeonjung.trendreader.R;
 import app.kimyeonjung.trendreader.core.Const;
 import app.kimyeonjung.trendreader.data.FeedItem;
-import app.kimyeonjung.trendreader.data.otto.BookMarkEvent;
-import app.kimyeonjung.trendreader.data.otto.BusProvider;
+import app.kimyeonjung.trendreader.core.otto.BookMarkEvent;
+import app.kimyeonjung.trendreader.core.otto.BusProvider;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 
@@ -29,7 +29,6 @@ public class FeedDetailView extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_view);
 
@@ -39,7 +38,6 @@ public class FeedDetailView extends AppCompatActivity {
     }
 
     private void initView() {
-
         Toolbar toolbar = findViewById(R.id.detail_toolbar);
         toolbar.setTitle(feedItem.getPostTitle());
         setSupportActionBar(toolbar);
@@ -54,7 +52,6 @@ public class FeedDetailView extends AppCompatActivity {
     }
 
     private void changeBookMarkState() {
-
         try (Realm realm = Realm.getInstance(Const.DB.getBookMarkConfig())) {
 
             if (isBookMarked) {
@@ -95,7 +92,6 @@ public class FeedDetailView extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
@@ -112,7 +108,6 @@ public class FeedDetailView extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         getMenuInflater().inflate(R.menu.detail_menu, menu);
         /*
         색상필터
