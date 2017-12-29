@@ -1,25 +1,20 @@
 package app.kimyeonjung.trendreader.ui;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.widget.ImageView;
-
-import com.ogaclejapan.smarttablayout.SmartTabLayout;
-import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
-import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
 import app.kimyeonjung.trendreader.R;
+import app.kimyeonjung.trendreader.core.tab.MainTabAdapter;
 import app.kimyeonjung.trendreader.ui.feed.FeedBookMark;
 import app.kimyeonjung.trendreader.ui.feed.FeedSearch;
 import app.kimyeonjung.trendreader.ui.setting.SettingsActivity;
@@ -48,36 +43,20 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void initTabView() {
-        FragmentPagerItemAdapter tabAdapter = new FragmentPagerItemAdapter(
-                getSupportFragmentManager(), FragmentPagerItems.with(this)
-                .add(R.string.title_feed_all, FeedSearch.class)
-                .add(R.string.title_feed_book_mark, FeedBookMark.class)
-                .create());
+        final TabLayout tabLayout = findViewById(R.id.main_tab);
+        final ViewPager viewPager = findViewById(R.id.main_viewpager);
 
-        ViewPager viewPager = findViewById(R.id.viewpager);
-        viewPager.setAdapter(tabAdapter);
+        MainTabAdapter adapter = new MainTabAdapter(getSupportFragmentManager());
+        adapter.addFragment(R.drawable.ic_search, "", new FeedSearch());
+        adapter.addFragment(R.drawable.ic_bookmark, "", new FeedBookMark());
 
-        SmartTabLayout viewPagerTab = findViewById(R.id.viewpager_tab);
+        viewPager.setAdapter(adapter);
 
-        final LayoutInflater inflater = LayoutInflater.from(viewPagerTab.getContext());
-        final Resources res = viewPagerTab.getContext().getResources();
+        tabLayout.setupWithViewPager(viewPager);
 
-        viewPagerTab.setCustomTabView((container, position, adapter) -> {
-            ImageView icon = (ImageView) inflater.inflate(R.layout.smart_tab_icon, container,
-                    false);
-            switch (position) {
-                case 0:
-                    icon.setImageDrawable(res.getDrawable(R.drawable.ic_search));
-                    break;
-                case 1:
-                    icon.setImageDrawable(res.getDrawable(R.drawable.ic_cabinet));
-                    break;
-                default:
-                    throw new IllegalStateException("Invalid position: " + position);
-            }
-            return icon;
-        });
-        viewPagerTab.setViewPager(viewPager);
+        for (int i = 0; i < viewPager.getAdapter().getCount(); i++) {
+            tabLayout.getTabAt(i).setIcon(adapter.getFragmentInfo(i).getIconResId());
+        }
     }
 
     @Override
