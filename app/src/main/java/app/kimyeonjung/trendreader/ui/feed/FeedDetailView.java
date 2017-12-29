@@ -17,6 +17,8 @@ import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import app.kimyeonjung.trendreader.R;
 import app.kimyeonjung.trendreader.core.Const;
 import app.kimyeonjung.trendreader.data.FeedItem;
+import app.kimyeonjung.trendreader.data.otto.BookMarkEvent;
+import app.kimyeonjung.trendreader.data.otto.BusProvider;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 
@@ -87,6 +89,7 @@ public class FeedDetailView extends AppCompatActivity {
 
             isBookMarked = !isBookMarked;
             changeBookMarkIcon();
+            BusProvider.getInstance().post(new BookMarkEvent());
         }
     }
 
