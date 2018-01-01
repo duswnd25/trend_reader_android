@@ -7,11 +7,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,29 +20,24 @@ import android.view.ViewGroup;
 import com.cooltechworks.views.shimmer.ShimmerRecyclerView;
 import com.yalantis.phoenix.PullToRefreshView;
 
-import java.util.LinkedList;
-
 import app.kimyeonjung.trendreader.R;
 import app.kimyeonjung.trendreader.core.Const;
 import app.kimyeonjung.trendreader.data.FeedItem;
 import app.kimyeonjung.trendreader.data.feed.FeedAdapter;
 import app.kimyeonjung.trendreader.data.feed.FeedManager;
 import io.realm.Realm;
-import io.realm.RealmChangeListener;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
 import io.realm.Sort;
 
-public class FeedSearch extends Fragment {
+public class BookMarkView extends Fragment {
 
-    private static RealmResults<FeedItem> feedList;
-    private FeedAdapter feedAdapter;
     private ShimmerRecyclerView feedView;
     private PullToRefreshView refreshView;
     private Realm realm;
 
-    public FeedSearch() {
-        setHasOptionsMenu(true);
+    public BookMarkView() {
+
     }
 
     @Override
@@ -67,15 +60,19 @@ public class FeedSearch extends Fragment {
         boolean isPaletteUse = prefs.getBoolean(getString(R.string.pref_feed_palette_use), true);
         int staggerColSize = prefs.getInt(getString(R.string.pref_feed_col_num), 1);
 
-        // DB
-        realm = Realm.getInstance(Const.DB.getFeedDBConfig());
-        RealmQuery<FeedItem> query = realm.where(FeedItem.class).sort("updateAt", Sort.DESCENDING);
-        feedList = query.findAll();
-
         // 리스트뷰
         feedView = view.findViewById(R.id.fragment_recycler_view);
         refreshView = view.findViewById(R.id.fragment_recycler_refresh);
         FloatingActionButton upToTopButton = view.findViewById(R.id.fragment_recycler_up_to_top);
+
+        // DB
+        realm = Realm.getInstance(Const.DB.getFeedDBConfig());
+        RealmQuery<FeedItem> query = realm.where(FeedItem.class).sort("updateAt", Sort.DESCENDING).equalTo("isBookMarked", true);
+
+        RealmResults<FeedItem> feedList = query.findAll();
+        if (feedList.size() == 0) {
+            feedFetch();
+        }
 
         // UpToButton
         upToTopButton.setOnClickListener(view1 -> feedView.smoothScrollToPosition(0));
@@ -83,7 +80,7 @@ public class FeedSearch extends Fragment {
         // Feed View
         StaggeredGridLayoutManager feedLayoutManager = new StaggeredGridLayoutManager(staggerColSize, StaggeredGridLayoutManager.VERTICAL);
         feedLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS);
-        feedAdapter = new FeedAdapter(getContext(), isPaletteUse, feedList);
+        FeedAdapter feedAdapter = new FeedAdapter(getContext(), isPaletteUse, feedList);
         feedView.setGridChildCount(staggerColSize);
         feedView.setLayoutManager(feedLayoutManager);
         feedView.setAdapter(feedAdapter);
@@ -102,9 +99,6 @@ public class FeedSearch extends Fragment {
 
         // Refresh View
         refreshView.setOnRefreshListener(this::feedFetch);
-
-        //feedFetch();
-        //initData();
     }
 
     private void feedFetch() {

@@ -15,8 +15,8 @@ import android.view.MenuItem;
 
 import app.kimyeonjung.trendreader.R;
 import app.kimyeonjung.trendreader.core.tab.MainTabAdapter;
-import app.kimyeonjung.trendreader.ui.feed.FeedBookMark;
-import app.kimyeonjung.trendreader.ui.feed.FeedSearch;
+import app.kimyeonjung.trendreader.ui.feed.BookMarkView;
+import app.kimyeonjung.trendreader.ui.feed.FeedView;
 import app.kimyeonjung.trendreader.ui.setting.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity
@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity
         final ViewPager viewPager = findViewById(R.id.main_viewpager);
 
         MainTabAdapter adapter = new MainTabAdapter(getSupportFragmentManager());
-        adapter.addFragment(R.drawable.ic_search, "", new FeedSearch());
-        //adapter.addFragment(R.drawable.ic_bookmark, "", new FeedBookMark());
+        adapter.addFragment(R.drawable.ic_search, "", new FeedView());
+        adapter.addFragment(R.drawable.ic_bookmark, "", new BookMarkView());
 
         viewPager.setAdapter(adapter);
 
