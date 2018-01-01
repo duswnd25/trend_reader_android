@@ -16,7 +16,7 @@ public class FeedItem extends RealmObject implements Parcelable {
 
     private String faviconUrl, blogName, blogUrl, postTitle, postContent;
     private Date updateAt;
-    private boolean isBookMarked;
+    private boolean isBookMarked = false;
 
     public FeedItem() {
     }
