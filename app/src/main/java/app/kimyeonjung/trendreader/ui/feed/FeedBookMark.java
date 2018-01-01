@@ -72,7 +72,7 @@ public class FeedBookMark extends Fragment {
         feedView.setLayoutManager(feedLayoutManager);
         feedView.setAdapter(feedAdapter);
         feedView.showShimmerAdapter();
-        try (Realm realm = Realm.getInstance(Const.DB.getBookMarkConfig())) {
+        try (Realm realm = Realm.getInstance(Const.DB.getFeedDBConfig())) {
             RealmQuery<FeedItem> query = realm.where(FeedItem.class);
             RealmResults<FeedItem> temp = query.findAll();
             bookMarkList = realm.copyFromRealm(temp);

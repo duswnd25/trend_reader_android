@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -53,7 +52,7 @@ public class FeedDetailView extends AppCompatActivity {
     }
 
     private void changeBookMarkState() {
-        try (Realm realm = Realm.getInstance(Const.DB.getBookMarkConfig())) {
+        try (Realm realm = Realm.getInstance(Const.DB.getFeedDBConfig())) {
 
             if (isBookMarked) {
                 RealmQuery<FeedItem> query = realm.where(FeedItem.class);
@@ -125,7 +124,7 @@ public class FeedDetailView extends AppCompatActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         // 북마크 여부에 따른 초기 아이콘 변경
-        try (Realm realm = Realm.getInstance(Const.DB.getBookMarkConfig())) {
+        try (Realm realm = Realm.getInstance(Const.DB.getFeedDBConfig())) {
             RealmQuery<FeedItem> query = realm.where(FeedItem.class);
             query.equalTo("postUrl", feedItem.getPostUrl());
             isBookMarked = query.count() != 0;

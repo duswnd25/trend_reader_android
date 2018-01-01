@@ -9,8 +9,17 @@ public class FeedItem extends RealmObject implements Serializable {
 
     private String faviconUrl, blogName, blogUrl, postTitle, postUrl, postContent;
     private Date updateAt;
+    private boolean isBookMarked;
 
     public FeedItem() {
+    }
+
+    public boolean isBookMarked() {
+        return isBookMarked;
+    }
+
+    public void setBookMarked(boolean bookMarked) {
+        isBookMarked = bookMarked;
     }
 
     public String getFaviconUrl() {

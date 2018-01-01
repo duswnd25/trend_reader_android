@@ -8,7 +8,7 @@ public class Const {
     }
 
     public static class DB {
-        public static RealmConfiguration getBookMarkConfig() {
+        public static RealmConfiguration getFeedDBConfig() {
             return new RealmConfiguration.Builder()
                     .name("bookmark.realm")
                     .schemaVersion(1)
