@@ -31,7 +31,7 @@ public class FeedDetailView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_view);
 
-        feedItem = (FeedItem) getIntent().getSerializableExtra(Const.INTENT.POST_DATA);
+        feedItem = getIntent().getParcelableExtra(Const.INTENT.POST_DATA);
 
         initView();
     }
@@ -58,9 +58,17 @@ public class FeedDetailView extends AppCompatActivity {
                 realm.beginTransaction();
                 temp.setBookMarked(!feedItem.isBookMarked());
                 realm.commitTransaction();
+                changeBookMarkIcon();
+
+                new StyleableToast
+                        .Builder(this)
+                        .textColor(Color.WHITE)
+                        .backgroundColor(getResources().getColor(R.color.colorPrimary))
+                        .iconResLeft(feedItem.isBookMarked() ? R.drawable.ic_bookmark_remove_fill : R.drawable.ic_bookmark_fill)
+                        .text(feedItem.isBookMarked()? getString(R.string.action_bookmark_remove) : getString(R.string.action_bookmark_save))
+                        .show();
             }
         }
-        changeBookMarkIcon();
     }
 
     @Override
