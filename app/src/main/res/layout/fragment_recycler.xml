@@ -7,19 +7,25 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:listitem="@layout/item_feed">
 
-    <com.cooltechworks.views.shimmer.ShimmerRecyclerView
-        android:id="@+id/fragment_recycler_view"
+    <com.yalantis.phoenix.PullToRefreshView
+        android:id="@+id/fragment_recycler_refresh"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:shimmer_demo_angle="20"
-        app:shimmer_demo_child_count="2"
-        app:shimmer_demo_grid_child_count="1"
-        app:shimmer_demo_layout="@layout/item_feed_demo"
-        app:shimmer_demo_layout_manager_type="grid"
-        app:shimmer_demo_shimmer_color="#21ffffff"
-        tools:context="app.kimyeonjung.trendreader.ui.FeedAll"
-        tools:listitem="@layout/item_feed" />
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <com.cooltechworks.views.shimmer.ShimmerRecyclerView
+            android:id="@+id/fragment_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:shimmer_demo_angle="20"
+            app:shimmer_demo_child_count="2"
+            app:shimmer_demo_grid_child_count="1"
+            app:shimmer_demo_layout="@layout/item_feed_demo"
+            app:shimmer_demo_layout_manager_type="grid"
+            app:shimmer_demo_shimmer_color="#21ffffff"
+            tools:context="app.kimyeonjung.trendreader.ui.FeedAll"
+            tools:listitem="@layout/item_feed" />
+    </com.yalantis.phoenix.PullToRefreshView>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fragment_recycler_up_to_top"

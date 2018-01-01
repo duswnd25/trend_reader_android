@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cooltechworks.views.shimmer.ShimmerRecyclerView;
+import com.yalantis.phoenix.PullToRefreshView;
 
 import java.util.LinkedList;
 
@@ -33,17 +34,17 @@ public class FeedSearch extends Fragment {
     private static LinkedList<FeedItem> feedList = new LinkedList<>(), feedListFiltered = new LinkedList<>();
     private FeedAdapter feedAdapter;
     private ShimmerRecyclerView feedView;
-    private SharedPreferences prefs;
+    private PullToRefreshView refreshView;
 
     public FeedSearch() {
         setHasOptionsMenu(true);
     }
 
-   @Override
-   public void onResume(){
+    @Override
+    public void onResume() {
         super.onResume();
-        initData();
-   }
+    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_recycler, container, false);
@@ -53,20 +54,22 @@ public class FeedSearch extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
         boolean isPaletteUse = prefs.getBoolean(getString(R.string.pref_feed_palette_use), true);
         int staggerColSize = prefs.getInt(getString(R.string.pref_feed_col_num), 1);
-        // 데이터 어댑터
-        feedAdapter = new FeedAdapter(getContext(), isPaletteUse, feedListFiltered);
+
         // 리스트뷰
         feedView = view.findViewById(R.id.fragment_recycler_view);
-        // 스크롤 버튼
+        refreshView = view.findViewById(R.id.fragment_recycler_refresh);
         FloatingActionButton upToTopButton = view.findViewById(R.id.fragment_recycler_up_to_top);
+
+        // UpToButton
         upToTopButton.setOnClickListener(view1 -> feedView.smoothScrollToPosition(0));
-        // 레이아웃 매니저
+
+        // Feed View
         StaggeredGridLayoutManager feedLayoutManager = new StaggeredGridLayoutManager(staggerColSize, StaggeredGridLayoutManager.VERTICAL);
         feedLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS);
-        // 리스트뷰 속성
+        feedAdapter = new FeedAdapter(getContext(), isPaletteUse, feedListFiltered);
         feedView.setGridChildCount(staggerColSize);
         feedView.setLayoutManager(feedLayoutManager);
         feedView.setAdapter(feedAdapter);
@@ -83,22 +86,26 @@ public class FeedSearch extends Fragment {
             }
         });
 
+        // Refresh View
+        refreshView.setOnRefreshListener(this::initData);
+
         initData();
     }
 
     private void initData() {
         feedView.showShimmerAdapter();
-
-        feedListFiltered.clear();
-        feedList.clear();
+        refreshView.setRefreshing(true);
 
         new FeedManager().fetchFeed(Const.API_URL.ALL, result -> {
+            feedListFiltered.clear();
+            feedList.clear();
+
             feedList.addAll(result);
             feedListFiltered.addAll(result);
 
-            feedView.setGridChildCount(prefs.getInt(getString(R.string.pref_feed_col_num), 1));
             feedView.hideShimmerAdapter();
-            Log.d("테스트", String.valueOf(feedListFiltered.size()));
+            refreshView.setRefreshing(false);
+
             feedAdapter.notifyDataSetChanged();
         });
     }

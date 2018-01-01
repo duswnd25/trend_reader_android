@@ -5,7 +5,8 @@
     android:id="@+id/feed_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/default_padding_quarter"
+    android:layout_marginBottom="@dimen/default_padding_quarter"
+    android:layout_marginTop="@dimen/default_padding_quarter"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardBackgroundColor="@android:color/white"
     app:cardCornerRadius="@dimen/card_radius">
