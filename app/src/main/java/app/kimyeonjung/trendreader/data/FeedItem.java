@@ -1,12 +1,15 @@
 package app.kimyeonjung.trendreader.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.util.Date;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class FeedItem extends RealmObject implements Serializable {
+public class FeedItem extends RealmObject implements Parcelable {
 
     @PrimaryKey
     private String postUrl;
@@ -16,14 +19,6 @@ public class FeedItem extends RealmObject implements Serializable {
     private boolean isBookMarked;
 
     public FeedItem() {
-    }
-
-    public boolean isBookMarked() {
-        return isBookMarked;
-    }
-
-    public void setBookMarked(boolean bookMarked) {
-        isBookMarked = bookMarked;
     }
 
     public String getFaviconUrl() {
@@ -82,7 +77,56 @@ public class FeedItem extends RealmObject implements Serializable {
         this.updateAt = updateAt;
     }
 
+    public boolean isBookMarked() {
+        return isBookMarked;
+    }
+
+    public void setBookMarked(boolean bookMarked) {
+        isBookMarked = bookMarked;
+    }
+
     public String getAll() {
         return blogName + postTitle + postContent;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.postUrl);
+        dest.writeString(this.faviconUrl);
+        dest.writeString(this.blogName);
+        dest.writeString(this.blogUrl);
+        dest.writeString(this.postTitle);
+        dest.writeString(this.postContent);
+        dest.writeLong(this.updateAt != null ? this.updateAt.getTime() : -1);
+        dest.writeByte(this.isBookMarked ? (byte) 1 : (byte) 0);
+    }
+
+    private FeedItem(Parcel in) {
+        this.postUrl = in.readString();
+        this.faviconUrl = in.readString();
+        this.blogName = in.readString();
+        this.blogUrl = in.readString();
+        this.postTitle = in.readString();
+        this.postContent = in.readString();
+        long tmpUpdateAt = in.readLong();
+        this.updateAt = tmpUpdateAt == -1 ? null : new Date(tmpUpdateAt);
+        this.isBookMarked = in.readByte() != 0;
+    }
+
+    public static final Creator<FeedItem> CREATOR = new Creator<FeedItem>() {
+        @Override
+        public FeedItem createFromParcel(Parcel source) {
+            return new FeedItem(source);
+        }
+
+        @Override
+        public FeedItem[] newArray(int size) {
+            return new FeedItem[size];
+        }
+    };
 }
