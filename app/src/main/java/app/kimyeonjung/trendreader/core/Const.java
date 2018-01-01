@@ -10,7 +10,7 @@ public class Const {
     public static class DB {
         public static RealmConfiguration getFeedDBConfig() {
             return new RealmConfiguration.Builder()
-                    .name("bookmark.realm")
+                    .name("feed.realm")
                     .schemaVersion(1)
                     .build();
         }

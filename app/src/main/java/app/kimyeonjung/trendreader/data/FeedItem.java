@@ -4,10 +4,14 @@ import java.io.Serializable;
 import java.util.Date;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class FeedItem extends RealmObject implements Serializable {
 
-    private String faviconUrl, blogName, blogUrl, postTitle, postUrl, postContent;
+    @PrimaryKey
+    private String postUrl;
+
+    private String faviconUrl, blogName, blogUrl, postTitle, postContent;
     private Date updateAt;
     private boolean isBookMarked;
 

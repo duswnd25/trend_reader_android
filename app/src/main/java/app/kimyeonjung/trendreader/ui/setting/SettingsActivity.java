@@ -28,11 +28,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     }
 
     private void initClickListener() {
-        // 텍스트크기
-        findPreference(getString(R.string.pref_feed_col_num)).setOnPreferenceChangeListener((preference, o) -> {
-            BusProvider.getInstance().post(new PreferenceEvent());
-            return false;
-        });
+
     }
 
     @Override

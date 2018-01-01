@@ -24,7 +24,6 @@ import io.realm.RealmQuery;
 
 public class FeedDetailView extends AppCompatActivity {
     private FeedItem feedItem;
-    private boolean isBookMarked = false;
     private MenuItem bookMarkItem;
 
     @Override
@@ -53,41 +52,15 @@ public class FeedDetailView extends AppCompatActivity {
 
     private void changeBookMarkState() {
         try (Realm realm = Realm.getInstance(Const.DB.getFeedDBConfig())) {
-
-            if (isBookMarked) {
-                RealmQuery<FeedItem> query = realm.where(FeedItem.class);
-                query.equalTo("postUrl", feedItem.getPostUrl());
-                FeedItem temp = query.findFirst();
-                if (temp != null) {
-                    realm.beginTransaction();
-                    temp.deleteFromRealm();
-                    realm.commitTransaction();
-                }
-            } else {
+            RealmQuery<FeedItem> query = realm.where(FeedItem.class);
+            FeedItem temp = query.equalTo("postUrl", feedItem.getPostUrl()).findFirst();
+            if (temp != null) {
                 realm.beginTransaction();
-                FeedItem feed = realm.createObject(FeedItem.class);
-                feed.setBlogName(feedItem.getBlogName());
-                feed.setBlogUrl(feedItem.getBlogUrl());
-                feed.setFaviconUrl(feedItem.getFaviconUrl());
-                feed.setPostContent(feedItem.getPostContent());
-                feed.setPostTitle(feedItem.getPostTitle());
-                feed.setPostUrl(feedItem.getPostUrl());
-                feed.setUpdateAt(feedItem.getUpdateAt());
+                temp.setBookMarked(!feedItem.isBookMarked());
                 realm.commitTransaction();
             }
-
-            new StyleableToast
-                    .Builder(this)
-                    .textColor(Color.WHITE)
-                    .backgroundColor(getResources().getColor(R.color.colorPrimary))
-                    .iconResLeft(isBookMarked ? R.drawable.ic_bookmark_remove_fill : R.drawable.ic_bookmark_fill)
-                    .text(isBookMarked ? getString(R.string.action_bookmark_remove) : getString(R.string.action_bookmark_save))
-                    .show();
-
-            isBookMarked = !isBookMarked;
-            changeBookMarkIcon();
-            BusProvider.getInstance().post(new BookMarkEvent());
         }
+        changeBookMarkIcon();
     }
 
     @Override
@@ -123,18 +96,12 @@ public class FeedDetailView extends AppCompatActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        // 북마크 여부에 따른 초기 아이콘 변경
-        try (Realm realm = Realm.getInstance(Const.DB.getFeedDBConfig())) {
-            RealmQuery<FeedItem> query = realm.where(FeedItem.class);
-            query.equalTo("postUrl", feedItem.getPostUrl());
-            isBookMarked = query.count() != 0;
-            changeBookMarkIcon();
-        }
+        changeBookMarkIcon();
         return super.onPrepareOptionsMenu(menu);
     }
 
     private void changeBookMarkIcon() {
         // 북마크 여부에 따라 변경
-        bookMarkItem.setIcon(isBookMarked ? R.drawable.ic_bookmark_fill : R.drawable.ic_bookmark);
+        bookMarkItem.setIcon(feedItem.isBookMarked() ? R.drawable.ic_bookmark_fill : R.drawable.ic_bookmark);
     }
 }

@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -28,21 +29,28 @@ import app.kimyeonjung.trendreader.core.Const;
 import app.kimyeonjung.trendreader.data.FeedItem;
 import app.kimyeonjung.trendreader.data.feed.FeedAdapter;
 import app.kimyeonjung.trendreader.data.feed.FeedManager;
+import io.realm.Realm;
+import io.realm.RealmChangeListener;
+import io.realm.RealmQuery;
+import io.realm.RealmResults;
+import io.realm.Sort;
 
 public class FeedSearch extends Fragment {
 
-    private static LinkedList<FeedItem> feedList = new LinkedList<>(), feedListFiltered = new LinkedList<>();
+    private static RealmResults<FeedItem> feedList;
     private FeedAdapter feedAdapter;
     private ShimmerRecyclerView feedView;
     private PullToRefreshView refreshView;
+    private Realm realm;
 
     public FeedSearch() {
         setHasOptionsMenu(true);
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onDestroy() {
+        super.onDestroy();
+        realm.close();
     }
 
     @Override
@@ -54,9 +62,15 @@ public class FeedSearch extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // Prefs
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
         boolean isPaletteUse = prefs.getBoolean(getString(R.string.pref_feed_palette_use), true);
         int staggerColSize = prefs.getInt(getString(R.string.pref_feed_col_num), 1);
+
+        // DB
+        realm = Realm.getInstance(Const.DB.getFeedDBConfig());
+        RealmQuery<FeedItem> query = realm.where(FeedItem.class).sort("updateAt", Sort.DESCENDING);
+        feedList = query.findAll();
 
         // 리스트뷰
         feedView = view.findViewById(R.id.fragment_recycler_view);
@@ -69,7 +83,7 @@ public class FeedSearch extends Fragment {
         // Feed View
         StaggeredGridLayoutManager feedLayoutManager = new StaggeredGridLayoutManager(staggerColSize, StaggeredGridLayoutManager.VERTICAL);
         feedLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS);
-        feedAdapter = new FeedAdapter(getContext(), isPaletteUse, feedListFiltered);
+        feedAdapter = new FeedAdapter(getContext(), isPaletteUse, feedList);
         feedView.setGridChildCount(staggerColSize);
         feedView.setLayoutManager(feedLayoutManager);
         feedView.setAdapter(feedAdapter);
@@ -87,26 +101,21 @@ public class FeedSearch extends Fragment {
         });
 
         // Refresh View
-        refreshView.setOnRefreshListener(this::initData);
+        refreshView.setOnRefreshListener(this::feedFetch);
 
-        initData();
+        //feedFetch();
+        //initData();
     }
 
-    private void initData() {
+    private void feedFetch() {
         feedView.showShimmerAdapter();
         refreshView.setRefreshing(true);
-
         new FeedManager().fetchFeed(Const.API_URL.ALL, result -> {
-            feedListFiltered.clear();
-            feedList.clear();
-
-            feedList.addAll(result);
-            feedListFiltered.addAll(result);
-
+            realm.beginTransaction();
+            realm.copyToRealmOrUpdate(result);
+            realm.commitTransaction();
             feedView.hideShimmerAdapter();
             refreshView.setRefreshing(false);
-
-            feedAdapter.notifyDataSetChanged();
         });
     }
 
@@ -131,13 +140,7 @@ public class FeedSearch extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                feedListFiltered.clear();
-                for (FeedItem item : feedList) {
-                    if (item.getAll().toLowerCase().contains(newText.toLowerCase())) {
-                        feedListFiltered.add(item);
-                    }
-                }
-                feedAdapter.notifyDataSetChanged();
+
                 return false;
             }
         });
