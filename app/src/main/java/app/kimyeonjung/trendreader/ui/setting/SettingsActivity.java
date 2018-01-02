@@ -1,6 +1,8 @@
 package app.kimyeonjung.trendreader.ui.setting;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.support.v7.widget.Toolbar;
@@ -9,10 +11,20 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 
 import app.kimyeonjung.trendreader.R;
+import app.kimyeonjung.trendreader.core.Const;
 import app.kimyeonjung.trendreader.core.otto.BusProvider;
 import app.kimyeonjung.trendreader.core.otto.PreferenceEvent;
+import app.kimyeonjung.trendreader.data.FeedItem;
+import io.realm.Realm;
+import io.realm.RealmQuery;
+import io.realm.RealmResults;
+import io.realm.Sort;
 
 public class SettingsActivity extends AppCompatPreferenceActivity {
+
+    private Realm realm;
+
+    private enum REMOVE_TYPE {ALL, FEED, BOOKMARK}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +36,58 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         root.addView(bar, 0); // insert at top
         bar.setNavigationOnClickListener(v -> finish());
 
+        realm = Realm.getInstance(Const.DB.getFeedDBConfig());
+
         initClickListener();
     }
 
     private void initClickListener() {
+        findPreference(getString(R.string.pref_delete_feed_db)).setOnPreferenceClickListener(preference -> {
+            removeData(REMOVE_TYPE.FEED);
+            return true;
+        });
 
+        findPreference(getString(R.string.pref_delete_bookmark_db)).setOnPreferenceClickListener(preference -> {
+            removeData(REMOVE_TYPE.BOOKMARK);
+            return true;
+        });
+
+        findPreference(getString(R.string.pref_delete_db)).setOnPreferenceClickListener(preference -> {
+            removeData(REMOVE_TYPE.ALL);
+            return true;
+        });
+    }
+
+    private void removeData(REMOVE_TYPE type) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.pref_remove_confirm));
+        builder.setMessage(type.name());
+        builder.setPositiveButton(android.R.string.yes,
+                (dialog, which) -> {
+                    RealmQuery<FeedItem> query = realm.where(FeedItem.class);
+                    switch (type) {
+                        case FEED:
+                            query.equalTo("isBookMarked", false);
+                            break;
+                        case BOOKMARK:
+                            query.equalTo("isBookMarked", true);
+                            break;
+                        default:
+                    }
+                    realm.beginTransaction();
+                    if (type == REMOVE_TYPE.BOOKMARK) {
+                        RealmResults<FeedItem> bookMarkList = query.findAll();
+                        for (FeedItem item : bookMarkList) {
+                            item.setBookMarked(false);
+                        }
+                    } else {
+                        query.findAll().deleteAllFromRealm();
+                    }
+                    realm.commitTransaction();
+                });
+        builder.setNegativeButton(android.R.string.no,
+                (dialog, which) -> dialog.dismiss());
+        builder.show();
     }
 
     @Override
@@ -40,5 +99,11 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onStop() {
+        realm.close();
+        super.onStop();
     }
 }
