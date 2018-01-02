@@ -1,32 +1,47 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="@string/pref_layout_category_title">
-        <app.kimyeonjung.trendreader.core.prefs.NumberPickerPreference
-            android:defaultValue="2"
-            android:icon="@drawable/ic_grid"
-            android:key="@string/pref_feed_col_num"
-            android:title="@string/pref_feed_col_num_des" />
+    <PreferenceCategory android:title="@string/pref_layout_category_title" />
+    <app.kimyeonjung.trendreader.core.prefs.NumberPickerPreference
+        android:defaultValue="2"
+        android:icon="@drawable/ic_grid"
+        android:key="@string/pref_feed_col_num"
+        android:title="@string/pref_feed_col_num_des" />
 
-        <SwitchPreference
-            android:defaultValue="true"
-            android:icon="@drawable/ic_palette"
-            android:key="@string/pref_feed_palette_use"
-            android:title="@string/pref_feed_palette_use_des" />
-    </PreferenceCategory>
+    <SwitchPreference
+        android:defaultValue="true"
+        android:icon="@drawable/ic_palette"
+        android:key="@string/pref_feed_palette_use"
+        android:title="@string/pref_feed_palette_use_des" />
 
-    <PreferenceCategory android:title="@string/pref_db_category_title">
-        <Preference
-            android:icon="@drawable/ic_feed"
-            android:key="@string/pref_delete_feed_db"
-            android:title="@string/pref_delete_feed_db_des" />
+    <PreferenceCategory android:title="@string/pref_db_category_title" />
+    <Preference
+        android:icon="@drawable/ic_feed"
+        android:key="@string/pref_delete_feed_db"
+        android:title="@string/pref_delete_feed_db_des" />
 
-        <Preference
-            android:icon="@drawable/ic_bookmark_fill_dark"
-            android:key="@string/pref_delete_bookmark_db"
-            android:title="@string/pref_delete_bookmark_db_des" />
+    <Preference
+        android:icon="@drawable/ic_bookmark_fill_dark"
+        android:key="@string/pref_delete_bookmark_db"
+        android:title="@string/pref_delete_bookmark_db_des" />
 
-        <Preference
-            android:icon="@drawable/ic_database_remove"
-            android:key="@string/pref_delete_db"
-            android:title="@string/pref_delete_db_des" />
-    </PreferenceCategory>
+    <Preference
+        android:icon="@drawable/ic_database_remove"
+        android:key="@string/pref_delete_db"
+        android:title="@string/pref_delete_db_des" />
+
+    <PreferenceCategory android:title="@string/pref_fcm_category_title" />
+    <SwitchPreference
+        android:defaultValue="true"
+        android:icon="@drawable/ic_alert_quick"
+        android:key="@string/pref_fcm_quickly"
+        android:title="@string/pref_fcm_quickly_des" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:icon="@drawable/ic_alert_morning"
+        android:key="@string/pref_fcm_daily_morning"
+        android:title="@string/pref_fcm_daily_morning_des" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:icon="@drawable/ic_alert_evening"
+        android:key="@string/pref_fcm_daily_evening"
+        android:title="@string/pref_fcm_daily_evening_des" />
 </PreferenceScreen>
