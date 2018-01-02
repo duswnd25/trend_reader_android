@@ -83,9 +83,9 @@ public class BookMarkAdapter extends RealmRecyclerViewAdapter<FeedItem, BookMark
 
         ViewHolder(View view) {
             super(view);
-            container = view.findViewById(R.id.feed_container);
-            profile = view.findViewById(R.id.feed_profile_image);
-            title = view.findViewById(R.id.feed_title);
+            container = view.findViewById(R.id.bookmark_container);
+            profile = view.findViewById(R.id.bookmark_profile);
+            title = view.findViewById(R.id.bookmark_title);
         }
     }
 }
