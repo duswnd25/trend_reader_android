@@ -70,9 +70,6 @@ public class FeedView extends Fragment {
         realm = Realm.getInstance(Const.DB.getFeedDBConfig());
         RealmQuery<FeedItem> query = realm.where(FeedItem.class).sort("updateAt", Sort.DESCENDING);
         RealmResults<FeedItem> feedList = query.findAll();
-        if (feedList.size() == 0) {
-            feedFetch();
-        }
 
         // UpToButton
         upToTopButton.setOnClickListener(view1 -> feedView.smoothScrollToPosition(0));
@@ -99,15 +96,22 @@ public class FeedView extends Fragment {
 
         // Refresh View
         refreshView.setOnRefreshListener(this::feedFetch);
+
+        feedFetch();
     }
 
     private void feedFetch() {
         feedView.showShimmerAdapter();
         refreshView.setRefreshing(true);
         new FeedManager().fetchFeed(Const.API_URL.ALL, result -> {
-            realm.beginTransaction();
-            //realm.copyToRealmOrUpdate(result);
-            realm.commitTransaction();
+            for (FeedItem item : result) {
+                RealmQuery<FeedItem> query = realm.where(FeedItem.class);
+                if (query.equalTo("postUrl", item.getPostUrl()).count() == 0) {
+                    realm.beginTransaction();
+                    realm.copyToRealm(item);
+                    realm.commitTransaction();
+                }
+            }
             feedView.hideShimmerAdapter();
             refreshView.setRefreshing(false);
         });
