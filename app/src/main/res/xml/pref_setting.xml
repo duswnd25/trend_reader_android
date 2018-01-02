@@ -1,5 +1,5 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="@string/pref_layout_category_title" />
+    <PreferenceCategory android:title="@string/pref_layout_category_title"/>
     <app.kimyeonjung.trendreader.core.prefs.NumberPickerPreference
         android:defaultValue="2"
         android:icon="@drawable/ic_grid"
