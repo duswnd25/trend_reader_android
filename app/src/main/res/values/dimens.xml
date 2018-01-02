@@ -12,6 +12,10 @@
     <dimen name="feed_title">32sp</dimen>
     <dimen name="text_margin">16dp</dimen>
 
+    <!-- Feed -->
     <dimen name="card_radius">0dp</dimen>
     <dimen name="feed_background_image_height">160dp</dimen>
+
+    <!-- BookMark -->
+    <dimen name="bookmark_favicon_size">72dp</dimen>
 </resources>
