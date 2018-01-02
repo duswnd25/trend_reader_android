@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -68,7 +69,6 @@ public class FeedView extends Fragment {
         // DB
         realm = Realm.getInstance(Const.DB.getFeedDBConfig());
         RealmQuery<FeedItem> query = realm.where(FeedItem.class).sort("updateAt", Sort.DESCENDING);
-
         RealmResults<FeedItem> feedList = query.findAll();
         if (feedList.size() == 0) {
             feedFetch();
@@ -106,7 +106,7 @@ public class FeedView extends Fragment {
         refreshView.setRefreshing(true);
         new FeedManager().fetchFeed(Const.API_URL.ALL, result -> {
             realm.beginTransaction();
-            realm.copyToRealmOrUpdate(result);
+            //realm.copyToRealmOrUpdate(result);
             realm.commitTransaction();
             feedView.hideShimmerAdapter();
             refreshView.setRefreshing(false);
