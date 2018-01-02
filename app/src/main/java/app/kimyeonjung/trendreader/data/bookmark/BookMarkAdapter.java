@@ -64,10 +64,10 @@ public class BookMarkAdapter extends RealmRecyclerViewAdapter<FeedItem, BookMark
                         super.onResourceReady(bitmap, anim);
                         if (isPaletteUse) {
                             Palette palette = Palette.from(bitmap).generate();
-                            Palette.Swatch vibrantSwatch = palette.getVibrantSwatch();
+                            Palette.Swatch vibrantSwatch = palette.getDominantSwatch();
                             if (vibrantSwatch != null) {
                                 holder.container.setCardBackgroundColor(vibrantSwatch.getRgb());
-                                holder.title.setTextColor(vibrantSwatch.getTitleTextColor());
+                                holder.title.setTextColor(vibrantSwatch.getBodyTextColor());
                             }
                         }
                     }
