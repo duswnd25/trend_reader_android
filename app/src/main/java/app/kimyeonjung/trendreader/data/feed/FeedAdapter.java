@@ -29,7 +29,7 @@ public class FeedAdapter extends RealmRecyclerViewAdapter<FeedItem, FeedAdapter.
     private boolean isPaletteUse;
 
     public FeedAdapter(Context context, boolean isPaletteUse, OrderedRealmCollection<FeedItem> data) {
-        super(data, false);
+        super(data, true);
         this.context = context;
         this.isPaletteUse = isPaletteUse;
         setHasStableIds(false);
