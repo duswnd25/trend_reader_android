@@ -76,7 +76,7 @@ public class FeedAdapter extends RealmRecyclerViewAdapter<FeedItem, FeedAdapter.
                         super.onResourceReady(bitmap, anim);
                         if (isPaletteUse) {
                             Palette palette = Palette.from(bitmap).generate();
-                            Palette.Swatch vibrantSwatch = palette.getVibrantSwatch();
+                            Palette.Swatch vibrantSwatch = palette.getDominantSwatch();
                             if (vibrantSwatch != null) {
                                 holder.descriptionContainer.setBackgroundColor(vibrantSwatch.getRgb());
                                 holder.description.setTextColor(vibrantSwatch.getBodyTextColor());
