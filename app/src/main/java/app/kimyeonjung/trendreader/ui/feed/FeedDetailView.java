@@ -60,12 +60,13 @@ public class FeedDetailView extends AppCompatActivity {
     private void changeBookMarkState() {
         RealmQuery<FeedItem> query = realm.where(FeedItem.class).equalTo("postUrl", feedItem.getPostUrl());
         FeedItem temp = query.findFirst();
+
         realm.beginTransaction();
         temp.setBookMarked(!temp.isBookMarked());
-        if (temp.isBookMarked()) {
-            temp.setBookMarkAt(new Date());
-        }
+        temp.setBookMarkAt(new Date());
         realm.commitTransaction();
+
+        feedItem.setBookMarked(temp.isBookMarked());
 
         changeBookMarkIcon();
 
@@ -73,8 +74,8 @@ public class FeedDetailView extends AppCompatActivity {
                 .Builder(this)
                 .textColor(Color.WHITE)
                 .backgroundColor(getResources().getColor(R.color.colorPrimary))
-                .iconResLeft(!feedItem.isBookMarked() ? R.drawable.ic_bookmark_remove_fill : R.drawable.ic_bookmark_fill)
-                .text(!feedItem.isBookMarked() ? getString(R.string.action_bookmark_remove) : getString(R.string.action_bookmark_save))
+                .iconResLeft(feedItem.isBookMarked() ? R.drawable.ic_bookmark_fill : R.drawable.ic_bookmark_remove_fill)
+                .text(feedItem.isBookMarked() ? getString(R.string.action_bookmark_save) : getString(R.string.action_bookmark_remove))
                 .show();
     }
 
