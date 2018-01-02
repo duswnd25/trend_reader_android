@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -20,12 +19,8 @@ import java.util.Date;
 import app.kimyeonjung.trendreader.R;
 import app.kimyeonjung.trendreader.core.Const;
 import app.kimyeonjung.trendreader.data.FeedItem;
-import app.kimyeonjung.trendreader.core.otto.BookMarkEvent;
-import app.kimyeonjung.trendreader.core.otto.BusProvider;
 import io.realm.Realm;
 import io.realm.RealmQuery;
-import io.realm.RealmResults;
-import io.realm.Sort;
 
 public class FeedDetailView extends AppCompatActivity {
     private FeedItem feedItem;
@@ -38,7 +33,7 @@ public class FeedDetailView extends AppCompatActivity {
         setContentView(R.layout.activity_detail_view);
 
         realm = Realm.getInstance(Const.DB.getFeedDBConfig());
-        feedItem = getIntent().getParcelableExtra(Const.INTENT.POST_DATA);
+        feedItem = getIntent().getParcelableExtra(Const.INTENT.FEED_POST);
 
         initView();
     }

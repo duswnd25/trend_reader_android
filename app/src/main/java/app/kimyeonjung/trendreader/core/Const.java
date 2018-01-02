@@ -17,6 +17,6 @@ public class Const {
     }
 
     public class INTENT {
-        public static final String POST_DATA = "blog_name";
+        public static final String FEED_POST = "feed_item";
     }
 }

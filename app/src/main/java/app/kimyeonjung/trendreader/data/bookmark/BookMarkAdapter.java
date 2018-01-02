@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -46,7 +45,7 @@ public class BookMarkAdapter extends RealmRecyclerViewAdapter<FeedItem, BookMark
         // Container
         holder.container.setOnClickListener(view -> {
             Intent intent = new Intent(context, FeedDetailView.class);
-            intent.putExtra(Const.INTENT.POST_DATA, holder.data);
+            intent.putExtra(Const.INTENT.FEED_POST, holder.data);
             context.startActivity(intent);
         });
 

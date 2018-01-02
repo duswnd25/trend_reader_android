@@ -46,7 +46,7 @@ public class FeedAdapter extends RealmRecyclerViewAdapter<FeedItem, FeedAdapter.
         // Container
         holder.container.setOnClickListener(view -> {
             Intent intent = new Intent(context, FeedDetailView.class);
-            intent.putExtra(Const.INTENT.POST_DATA, holder.data);
+            intent.putExtra(Const.INTENT.FEED_POST, holder.data);
             context.startActivity(intent);
         });
 
