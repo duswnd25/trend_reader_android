@@ -15,6 +15,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
 
+import java.util.Date;
+
 import app.kimyeonjung.trendreader.R;
 import app.kimyeonjung.trendreader.core.Const;
 import app.kimyeonjung.trendreader.data.FeedItem;
@@ -60,7 +62,9 @@ public class FeedDetailView extends AppCompatActivity {
         FeedItem temp = query.findFirst();
         realm.beginTransaction();
         temp.setBookMarked(!temp.isBookMarked());
-        feedItem = realm.copyFromRealm(temp);
+        if (temp.isBookMarked()) {
+            temp.setBookMarkAt(new Date());
+        }
         realm.commitTransaction();
 
         changeBookMarkIcon();

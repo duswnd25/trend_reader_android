@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -33,8 +34,9 @@ import io.realm.Sort;
 public class BookMarkView extends Fragment {
 
     private ShimmerRecyclerView feedView;
-    private PullToRefreshView refreshView;
     private Realm realm;
+    private RealmResults<FeedItem> feedList;
+    private PullToRefreshView refreshView;
 
     public BookMarkView() {
 
@@ -67,12 +69,10 @@ public class BookMarkView extends Fragment {
 
         // DB
         realm = Realm.getInstance(Const.DB.getFeedDBConfig());
-        RealmQuery<FeedItem> query = realm.where(FeedItem.class).sort("updateAt", Sort.DESCENDING).equalTo("isBookMarked", true);
-
-        RealmResults<FeedItem> feedList = query.findAll();
-        if (feedList.size() == 0) {
-            feedFetch();
-        }
+        RealmQuery<FeedItem> query = realm.where(FeedItem.class)
+                .equalTo("isBookMarked", true)
+                .sort("bookMarkAt", Sort.DESCENDING);
+        feedList = query.findAll();
 
         // UpToButton
         upToTopButton.setOnClickListener(view1 -> feedView.smoothScrollToPosition(0));
@@ -98,19 +98,17 @@ public class BookMarkView extends Fragment {
         });
 
         // Refresh View
-        refreshView.setOnRefreshListener(this::feedFetch);
+        refreshView.setOnRefreshListener(this::initData);
     }
 
-    private void feedFetch() {
+    private void initData() {
         feedView.showShimmerAdapter();
-        refreshView.setRefreshing(true);
-        new FeedManager().fetchFeed(Const.API_URL.ALL, result -> {
-            realm.beginTransaction();
-            realm.copyToRealmOrUpdate(result);
-            realm.commitTransaction();
-            feedView.hideShimmerAdapter();
-            refreshView.setRefreshing(false);
-        });
+        RealmQuery<FeedItem> query = realm.where(FeedItem.class)
+                .equalTo("isBookMarked", true)
+                .sort("bookMarkAt", Sort.DESCENDING);
+        feedList = query.findAll();
+        feedView.hideShimmerAdapter();
+        refreshView.setRefreshing(false);
     }
 
     @Override

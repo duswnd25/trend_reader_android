@@ -15,7 +15,7 @@ public class FeedItem extends RealmObject implements Parcelable {
     private String postUrl;
 
     private String faviconUrl, blogName, blogUrl, postTitle, postContent;
-    private Date updateAt;
+    private Date updateAt, bookMarkAt = new Date();
     private boolean isBookMarked = false;
 
     public FeedItem() {
@@ -89,6 +89,15 @@ public class FeedItem extends RealmObject implements Parcelable {
         return blogName + postTitle + postContent;
     }
 
+    public Date getBookMarkAt() {
+        return bookMarkAt;
+    }
+
+    public void setBookMarkAt(Date bookMarkAt) {
+        this.bookMarkAt = bookMarkAt;
+    }
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -103,6 +112,7 @@ public class FeedItem extends RealmObject implements Parcelable {
         dest.writeString(this.postTitle);
         dest.writeString(this.postContent);
         dest.writeLong(this.updateAt != null ? this.updateAt.getTime() : -1);
+        dest.writeLong(this.bookMarkAt != null ? this.bookMarkAt.getTime() : -1);
         dest.writeByte(this.isBookMarked ? (byte) 1 : (byte) 0);
     }
 
@@ -115,6 +125,8 @@ public class FeedItem extends RealmObject implements Parcelable {
         this.postContent = in.readString();
         long tmpUpdateAt = in.readLong();
         this.updateAt = tmpUpdateAt == -1 ? null : new Date(tmpUpdateAt);
+        long tmpBookMarkAt = in.readLong();
+        this.bookMarkAt = tmpBookMarkAt == -1 ? null : new Date(tmpBookMarkAt);
         this.isBookMarked = in.readByte() != 0;
     }
 
