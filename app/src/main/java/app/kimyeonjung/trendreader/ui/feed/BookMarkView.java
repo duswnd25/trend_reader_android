@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -24,6 +25,7 @@ import com.yalantis.phoenix.PullToRefreshView;
 import app.kimyeonjung.trendreader.R;
 import app.kimyeonjung.trendreader.core.Const;
 import app.kimyeonjung.trendreader.data.FeedItem;
+import app.kimyeonjung.trendreader.data.bookmark.BookMarkAdapter;
 import app.kimyeonjung.trendreader.data.feed.FeedAdapter;
 import app.kimyeonjung.trendreader.data.feed.FeedManager;
 import io.realm.Realm;
@@ -35,7 +37,6 @@ public class BookMarkView extends Fragment {
 
     private ShimmerRecyclerView feedView;
     private Realm realm;
-    private RealmResults<FeedItem> feedList;
     private PullToRefreshView refreshView;
 
     public BookMarkView() {
@@ -69,18 +70,20 @@ public class BookMarkView extends Fragment {
 
         // DB
         realm = Realm.getInstance(Const.DB.getFeedDBConfig());
+        feedView.showShimmerAdapter();
         RealmQuery<FeedItem> query = realm.where(FeedItem.class)
                 .equalTo("isBookMarked", true)
                 .sort("bookMarkAt", Sort.DESCENDING);
-        feedList = query.findAll();
+        RealmResults<FeedItem> feedList = query.findAll();
+        feedView.hideShimmerAdapter();
+        refreshView.setRefreshing(false);
 
         // UpToButton
         upToTopButton.setOnClickListener(view1 -> feedView.smoothScrollToPosition(0));
 
         // Feed View
-        StaggeredGridLayoutManager feedLayoutManager = new StaggeredGridLayoutManager(staggerColSize, StaggeredGridLayoutManager.VERTICAL);
-        feedLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS);
-        FeedAdapter feedAdapter = new FeedAdapter(getContext(), isPaletteUse, feedList);
+        LinearLayoutManager feedLayoutManager = new LinearLayoutManager(getContext());
+        BookMarkAdapter feedAdapter = new BookMarkAdapter(getContext(), isPaletteUse, feedList);
         feedView.setGridChildCount(staggerColSize);
         feedView.setLayoutManager(feedLayoutManager);
         feedView.setAdapter(feedAdapter);
@@ -102,13 +105,7 @@ public class BookMarkView extends Fragment {
     }
 
     private void initData() {
-        feedView.showShimmerAdapter();
-        RealmQuery<FeedItem> query = realm.where(FeedItem.class)
-                .equalTo("isBookMarked", true)
-                .sort("bookMarkAt", Sort.DESCENDING);
-        feedList = query.findAll();
-        feedView.hideShimmerAdapter();
-        refreshView.setRefreshing(false);
+       refreshView.setRefreshing(false);
     }
 
     @Override

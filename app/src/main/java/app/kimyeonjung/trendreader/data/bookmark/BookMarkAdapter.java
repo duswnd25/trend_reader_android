@@ -29,7 +29,7 @@ public class BookMarkAdapter extends RealmRecyclerViewAdapter<FeedItem, BookMark
     private boolean isPaletteUse;
 
     public BookMarkAdapter(Context context, boolean isPaletteUse, OrderedRealmCollection<FeedItem> data) {
-        super(data, false);
+        super(data, true);
         this.context = context;
         this.isPaletteUse = isPaletteUse;
         setHasStableIds(false);
@@ -37,7 +37,7 @@ public class BookMarkAdapter extends RealmRecyclerViewAdapter<FeedItem, BookMark
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_feed, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_bookmark, parent, false));
     }
 
     @Override
@@ -54,18 +54,6 @@ public class BookMarkAdapter extends RealmRecyclerViewAdapter<FeedItem, BookMark
         holder.title.setText(holder.data.getPostTitle());
         holder.title.setSelected(true);
 
-        // Content
-        String content = holder.data.getPostContent();
-        if (content.length() != 0) {
-            if (holder.data.getPostContent().length() > 300) {
-                content = content.substring(0, 300);
-            }
-            holder.description.setText(content);
-
-        } else {
-            holder.description.setVisibility(View.GONE);
-        }
-
         // Favicon Image View
         Glide.with(context).load(holder.data.getFaviconUrl()).asBitmap()
                 .centerCrop().placeholder(R.mipmap.ic_launcher_round)
@@ -78,8 +66,8 @@ public class BookMarkAdapter extends RealmRecyclerViewAdapter<FeedItem, BookMark
                             Palette palette = Palette.from(bitmap).generate();
                             Palette.Swatch vibrantSwatch = palette.getVibrantSwatch();
                             if (vibrantSwatch != null) {
-                                holder.descriptionContainer.setBackgroundColor(vibrantSwatch.getRgb());
-                                holder.description.setTextColor(vibrantSwatch.getBodyTextColor());
+                                holder.container.setCardBackgroundColor(vibrantSwatch.getRgb());
+                                holder.title.setTextColor(vibrantSwatch.getTitleTextColor());
                             }
                         }
                     }
@@ -87,9 +75,8 @@ public class BookMarkAdapter extends RealmRecyclerViewAdapter<FeedItem, BookMark
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView title, description;
+        private TextView title;
         private ImageView profile;
-        private LinearLayout descriptionContainer;
         private CardView container;
 
         private FeedItem data;
@@ -99,8 +86,6 @@ public class BookMarkAdapter extends RealmRecyclerViewAdapter<FeedItem, BookMark
             container = view.findViewById(R.id.feed_container);
             profile = view.findViewById(R.id.feed_profile_image);
             title = view.findViewById(R.id.feed_title);
-            description = view.findViewById(R.id.feed_description);
-            descriptionContainer = view.findViewById(R.id.feed_description_container);
         }
     }
 }
