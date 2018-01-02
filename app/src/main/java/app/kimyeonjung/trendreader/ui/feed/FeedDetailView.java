@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -21,16 +22,20 @@ import app.kimyeonjung.trendreader.core.otto.BookMarkEvent;
 import app.kimyeonjung.trendreader.core.otto.BusProvider;
 import io.realm.Realm;
 import io.realm.RealmQuery;
+import io.realm.RealmResults;
+import io.realm.Sort;
 
 public class FeedDetailView extends AppCompatActivity {
     private FeedItem feedItem;
     private MenuItem bookMarkItem;
+    private Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_view);
 
+        realm = Realm.getInstance(Const.DB.getFeedDBConfig());
         feedItem = getIntent().getParcelableExtra(Const.INTENT.POST_DATA);
 
         initView();
@@ -51,24 +56,22 @@ public class FeedDetailView extends AppCompatActivity {
     }
 
     private void changeBookMarkState() {
-        try (Realm realm = Realm.getInstance(Const.DB.getFeedDBConfig())) {
-            RealmQuery<FeedItem> query = realm.where(FeedItem.class);
-            FeedItem temp = query.equalTo("postUrl", feedItem.getPostUrl()).findFirst();
-            if (temp != null) {
-                realm.beginTransaction();
-                temp.setBookMarked(!feedItem.isBookMarked());
-                realm.commitTransaction();
-                changeBookMarkIcon();
+        RealmQuery<FeedItem> query = realm.where(FeedItem.class).equalTo("postUrl", feedItem.getPostUrl());
+        FeedItem temp = query.findFirst();
+        realm.beginTransaction();
+        temp.setBookMarked(!temp.isBookMarked());
+        feedItem = realm.copyFromRealm(temp);
+        realm.commitTransaction();
 
-                new StyleableToast
-                        .Builder(this)
-                        .textColor(Color.WHITE)
-                        .backgroundColor(getResources().getColor(R.color.colorPrimary))
-                        .iconResLeft(feedItem.isBookMarked() ? R.drawable.ic_bookmark_remove_fill : R.drawable.ic_bookmark_fill)
-                        .text(feedItem.isBookMarked()? getString(R.string.action_bookmark_remove) : getString(R.string.action_bookmark_save))
-                        .show();
-            }
-        }
+        changeBookMarkIcon();
+
+        new StyleableToast
+                .Builder(this)
+                .textColor(Color.WHITE)
+                .backgroundColor(getResources().getColor(R.color.colorPrimary))
+                .iconResLeft(!feedItem.isBookMarked() ? R.drawable.ic_bookmark_remove_fill : R.drawable.ic_bookmark_fill)
+                .text(!feedItem.isBookMarked() ? getString(R.string.action_bookmark_remove) : getString(R.string.action_bookmark_save))
+                .show();
     }
 
     @Override
@@ -111,5 +114,11 @@ public class FeedDetailView extends AppCompatActivity {
     private void changeBookMarkIcon() {
         // 북마크 여부에 따라 변경
         bookMarkItem.setIcon(feedItem.isBookMarked() ? R.drawable.ic_bookmark_fill : R.drawable.ic_bookmark);
+    }
+
+    @Override
+    protected void onStop() {
+        realm.close();
+        super.onStop();
     }
 }
