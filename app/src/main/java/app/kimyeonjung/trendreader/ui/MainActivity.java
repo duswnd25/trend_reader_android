@@ -13,6 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import app.kimyeonjung.trendreader.R;
 import app.kimyeonjung.trendreader.core.tab.MainTabAdapter;
 import app.kimyeonjung.trendreader.ui.feed.BookMarkView;
@@ -21,10 +23,11 @@ import app.kimyeonjung.trendreader.ui.setting.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        FirebaseAnalytics.getInstance(this);
 
         setContentView(R.layout.activity_main);
 
