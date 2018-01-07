@@ -2,9 +2,7 @@ package app.kimyeonjung.trendreader.ui.setting;
 
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.preference.Preference;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -12,13 +10,11 @@ import android.widget.LinearLayout;
 
 import app.kimyeonjung.trendreader.R;
 import app.kimyeonjung.trendreader.core.Const;
-import app.kimyeonjung.trendreader.core.otto.BusProvider;
-import app.kimyeonjung.trendreader.core.otto.PreferenceEvent;
+import app.kimyeonjung.trendreader.core.fcm.FCMRegister;
 import app.kimyeonjung.trendreader.data.FeedItem;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
-import io.realm.Sort;
 
 public class SettingsActivity extends AppCompatPreferenceActivity {
 
@@ -99,6 +95,12 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPause() {
+        new FCMRegister().refreshSubscribe(this);
+        super.onPause();
     }
 
     @Override

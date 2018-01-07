@@ -30,6 +30,7 @@
     <string name="pref_feed_col_num">pref_feed_col_num</string>
     <string name="pref_feed_palette_use_des">Palette 사용</string>
     <string name="pref_feed_palette_use">pref_feed_palette_use</string>
+
     <!-- DB -->
     <string name="pref_delete_feed_db_des">Feed DB 삭제</string>
     <string name="pref_delete_feed_db">pref_delete_feed_db</string>
@@ -37,6 +38,7 @@
     <string name="pref_delete_bookmark_db">pref_delete_bookmark_db</string>
     <string name="pref_delete_db_des">전체 DB 삭제</string>
     <string name="pref_delete_db">pref_delete_db</string>
+
     <!-- FCM -->
     <string name="pref_fcm_quickly_des">바로 받기</string>
     <string name="pref_fcm_quickly">pref_fcm_quickly</string>
@@ -44,6 +46,11 @@
     <string name="pref_fcm_daily_morning">pref_fcm_daily_morning</string>
     <string name="pref_fcm_daily_evening_des">저녁에 받기</string>
     <string name="pref_fcm_daily_evening">pref_fcm_daily_evening</string>
+
+    <string name="fcm_quickly_Channel">channel_feed_quickly</string>
+    <string name="fcm_morning_Channel">channel_feed_morning</string>
+    <string name="fcm_evening_Channel">channel_feed_evening</string>
+
     <!-- ETC -->
     <string name="pref_remove_confirm">정말 삭제할까요?</string>
 
