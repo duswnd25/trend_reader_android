@@ -3,6 +3,7 @@ package app.kimyeonjung.trendreader.data.bookmark;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -68,6 +69,8 @@ public class BookMarkAdapter extends RealmRecyclerViewAdapter<FeedItem, BookMark
                                 holder.container.setCardBackgroundColor(vibrantSwatch.getRgb());
                                 holder.title.setTextColor(vibrantSwatch.getBodyTextColor());
                             }
+                        }else{
+                            holder.title.setTextColor(Color.BLACK);
                         }
                     }
                 });
