@@ -17,6 +17,7 @@
     <string name="title_setting">설정</string>
     <string name="title_about_dev">About Me</string>
     <string name="title_feed_detail">피드 상세보기</string>
+    <string name="title_about_app">About App</string>
 
     <!-- 상세보기 -->
     <string name="detail_image">상세보기 이미지</string>

@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_setting:
                 startActivity(new Intent(this, SettingsActivity.class));
                 break;
-            case R.id.nav_about:
+            case R.id.nav_about_dev:
                 startActivity(new Intent(this, AboutDev.class));
         }
 
