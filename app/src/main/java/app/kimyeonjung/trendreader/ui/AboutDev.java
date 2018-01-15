@@ -34,7 +34,7 @@ public class AboutDev extends AppCompatActivity {
                 .setName("YeonJung Kim")
                 .setSubTitle("Student")
                 .setLinksColumnsCount(4)
-                .setBrief("I'm warmed of mobile technologies. Ideas maker, curious and nature lover.")
+                .setBrief("컴퓨터공학 전공중인 학생입니다.")
                 .addGitHubLink("duswnd25")
                 .addLinkedInLink("연중-김-172989119")
                 .addEmailLink("duswnd25@gmail.com")

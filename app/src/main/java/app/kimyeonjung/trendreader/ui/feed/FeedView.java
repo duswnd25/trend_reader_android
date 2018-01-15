@@ -75,10 +75,10 @@ public class FeedView extends Fragment {
         upToTopButton.setOnClickListener(view1 -> feedView.smoothScrollToPosition(0));
 
         // Feed View
-        StaggeredGridLayoutManager feedLayoutManager = new StaggeredGridLayoutManager(staggerColSize, StaggeredGridLayoutManager.VERTICAL);
+        StaggeredGridLayoutManager feedLayoutManager = new StaggeredGridLayoutManager(staggerColSize+1, StaggeredGridLayoutManager.VERTICAL);
         feedLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS);
         FeedAdapter feedAdapter = new FeedAdapter(getContext(), isPaletteUse, feedList);
-        feedView.setGridChildCount(staggerColSize);
+        feedView.setGridChildCount(staggerColSize+2);
         feedView.setLayoutManager(feedLayoutManager);
         feedView.setAdapter(feedAdapter);
         feedView.setNestedScrollingEnabled(true);

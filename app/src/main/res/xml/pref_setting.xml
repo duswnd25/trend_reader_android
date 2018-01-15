@@ -36,6 +36,7 @@
             android:icon="@drawable/ic_alert_quick"
             android:key="@string/pref_fcm_quickly"
             android:title="@string/pref_fcm_quickly_des" />
+        <!--
         <SwitchPreference
             android:defaultValue="false"
             android:icon="@drawable/ic_alert_morning"
@@ -46,5 +47,6 @@
             android:icon="@drawable/ic_alert_evening"
             android:key="@string/pref_fcm_daily_evening"
             android:title="@string/pref_fcm_daily_evening_des" />
+            -->
     </app.kimyeonjung.trendreader.core.prefs.CustomPreferenceCategory>
 </PreferenceScreen>
