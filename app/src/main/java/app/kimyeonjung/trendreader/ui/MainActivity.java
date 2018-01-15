@@ -85,8 +85,10 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_about_dev:
                 startActivity(new Intent(this, AboutDev.class));
+                break;
             case R.id.nav_about_app:
                 startActivity(new Intent(this, AboutApp.class));
+                break;
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
