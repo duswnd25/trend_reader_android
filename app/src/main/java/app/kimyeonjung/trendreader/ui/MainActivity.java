@@ -15,6 +15,7 @@ import android.view.MenuItem;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
+import app.kimyeonjung.trendreader.AboutApp;
 import app.kimyeonjung.trendreader.R;
 import app.kimyeonjung.trendreader.core.tab.MainTabAdapter;
 import app.kimyeonjung.trendreader.ui.feed.BookMarkView;
@@ -85,6 +86,8 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_about_dev:
                 startActivity(new Intent(this, AboutDev.class));
+            case R.id.nav_about_app:
+                startActivity(new Intent(this, AboutApp.class));
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
