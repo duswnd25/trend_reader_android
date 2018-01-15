@@ -15,7 +15,6 @@ import android.view.MenuItem;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
-import app.kimyeonjung.trendreader.AboutApp;
 import app.kimyeonjung.trendreader.R;
 import app.kimyeonjung.trendreader.core.tab.MainTabAdapter;
 import app.kimyeonjung.trendreader.ui.feed.BookMarkView;

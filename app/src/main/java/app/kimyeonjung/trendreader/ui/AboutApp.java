@@ -1,7 +1,9 @@
-package app.kimyeonjung.trendreader;
+package app.kimyeonjung.trendreader.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import app.kimyeonjung.trendreader.R;
 
 public class AboutApp extends AppCompatActivity {
 
