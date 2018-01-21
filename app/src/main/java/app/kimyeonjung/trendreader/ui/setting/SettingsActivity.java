@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -57,12 +58,20 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         });
 
         findPreference(getString(R.string.pref_request_blog_add)).setOnPreferenceClickListener(preference -> {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Const.API_URL.ADD_BLOG_REQUEST)));
+            CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+            CustomTabsIntent customTabsIntent = builder.build();
+            builder.setToolbarColor(getResources().getColor(R.color.colorPrimary));
+            builder.setShowTitle(true);
+            customTabsIntent.launchUrl(this, Uri.parse(Const.API_URL.ADD_BLOG_REQUEST));
             return true;
         });
 
         findPreference(getString(R.string.pref_request_feature_add)).setOnPreferenceClickListener(preference -> {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Const.API_URL.FEATURE_REQUEST)));
+            CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+            CustomTabsIntent customTabsIntent = builder.build();
+            builder.setToolbarColor(getResources().getColor(R.color.colorPrimary));
+            builder.setShowTitle(true);
+            customTabsIntent.launchUrl(this, Uri.parse(Const.API_URL.FEATURE_REQUEST));
             return true;
         });
     }

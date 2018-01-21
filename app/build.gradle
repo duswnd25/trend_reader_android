@@ -59,8 +59,11 @@ dependencies {
     implementation('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
         transitive = true
     }
+    // FireBase
     implementation 'com.google.firebase:firebase-core:11.8.0'
     implementation 'com.google.firebase:firebase-messaging:11.8.0'
+    // Custom Chrome Tab
+    implementation 'com.android.support:customtabs:27.0.2'
 }
 // 얘는 제일 하단에 위치해야 한다
 apply plugin: 'com.google.gms.google-services'

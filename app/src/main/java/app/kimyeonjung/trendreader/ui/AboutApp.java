@@ -50,6 +50,7 @@ public class AboutApp extends AppCompatActivity {
         itemList.add("com.google.firebase:firebase-core:");
         itemList.add("com.google.firebase:firebase-messaging");
         itemList.add("icons8.com");
+        itemList.add("com.android.support:customtabs");
 
         LibraryAdapter galleryAdapter;
         galleryAdapter = new LibraryAdapter(itemList);
