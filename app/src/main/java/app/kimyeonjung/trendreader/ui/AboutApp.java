@@ -49,6 +49,7 @@ public class AboutApp extends AppCompatActivity {
         itemList.add("com.crashlytics.sdk.android:crashlytics");
         itemList.add("com.google.firebase:firebase-core:");
         itemList.add("com.google.firebase:firebase-messaging");
+        itemList.add("icons8.com");
 
         LibraryAdapter galleryAdapter;
         galleryAdapter = new LibraryAdapter(itemList);

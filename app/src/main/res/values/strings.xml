@@ -52,11 +52,20 @@
     <string name="fcm_morning_Channel">channel_feed_morning</string>
     <string name="fcm_evening_Channel">channel_feed_evening</string>
 
+    <!-- REQUEST-->
+    <string name="pref_request_blog_add">pref_request_blog_add</string>
+    <string name="pref_request_blog_add_des">블로그 추가 요청</string>
+    <string name="pref_request_feature_add">pref_request_feature_add</string>
+    <string name="pref_request_feature_add_des">건의</string>
+
     <!-- ETC -->
     <string name="pref_remove_confirm">정말 삭제할까요?</string>
-
+    <!-- TITLE -->
     <string name="pref_db_category_title">데이터 삭제</string>
     <string name="pref_layout_category_title">Layout 설정</string>
     <string name="pref_fcm_category_title">알림 설정</string>
-    <string name="term_of_license">Android용 TrendReader앱은\n오픈소스 소프트웨어를 사용하여 만들어졌습니다.</string>
+    <string name="pref_else_title">그외</string>
+
+    <!-- About App -->
+    <string name="term_of_license">Android용 TrendReader앱은\n오픈소스 소프트웨어와\n다음 이미지를 사용하여 만들어졌습니다.</string>
 </resources>

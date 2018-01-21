@@ -52,6 +52,16 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             removeData(REMOVE_TYPE.ALL);
             return true;
         });
+
+        findPreference(getString(R.string.pref_request_blog_add)).setOnPreferenceClickListener(preference -> {
+           
+            return true;
+        });
+
+        findPreference(getString(R.string.pref_request_feature_add)).setOnPreferenceClickListener(preference -> {
+
+            return true;
+        });
     }
 
     private void removeData(REMOVE_TYPE type) {

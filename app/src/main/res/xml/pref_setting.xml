@@ -49,4 +49,15 @@
             android:title="@string/pref_fcm_daily_evening_des" />
             -->
     </app.kimyeonjung.trendreader.core.prefs.CustomPreferenceCategory>
+
+    <app.kimyeonjung.trendreader.core.prefs.CustomPreferenceCategory android:title="@string/pref_else_title">
+        <Preference
+            android:icon="@drawable/ic_request"
+            android:key="@string/pref_request_blog_add"
+            android:title="@string/pref_request_blog_add_des" />
+        <Preference
+            android:icon="@drawable/ic_request_feature"
+            android:key="@string/pref_request_feature_add"
+            android:title="@string/pref_request_feature_add_des" />
+    </app.kimyeonjung.trendreader.core.prefs.CustomPreferenceCategory>
 </PreferenceScreen>
