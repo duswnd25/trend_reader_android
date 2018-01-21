@@ -18,4 +18,7 @@
 
     <!-- BookMark -->
     <dimen name="bookmark_favicon_size">72dp</dimen>
+    
+    <!-- About App-->
+    <dimen name="about_app_title_text_size">24sp</dimen>
 </resources>
