@@ -78,7 +78,7 @@ public class FeedView extends Fragment {
         StaggeredGridLayoutManager feedLayoutManager = new StaggeredGridLayoutManager(staggerColSize, StaggeredGridLayoutManager.VERTICAL);
         feedLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS);
         FeedAdapter feedAdapter = new FeedAdapter(getContext(), isPaletteUse, feedList);
-        feedView.setGridChildCount(staggerColSize+2);
+        feedView.setGridChildCount(staggerColSize);
         feedView.setLayoutManager(feedLayoutManager);
         feedView.setAdapter(feedAdapter);
         feedView.setNestedScrollingEnabled(true);
