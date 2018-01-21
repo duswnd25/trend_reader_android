@@ -49,7 +49,7 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
         <!-- Firebase End -->
-        <activity android:name=".ui.AboutApp"></activity>
+        <activity android:name=".ui.AboutApp" / >
     </application>
 
 </manifest>
