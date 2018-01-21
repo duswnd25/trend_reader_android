@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity
 
         MainTabAdapter adapter = new MainTabAdapter(getSupportFragmentManager());
         adapter.addFragment(R.drawable.ic_search, "", new FeedView());
-        adapter.addFragment(R.drawable.ic_bookmark, "", new BookMarkView());
+        adapter.addFragment(R.drawable.ic_bookmark_list, "", new BookMarkView());
 
         viewPager.setAdapter(adapter);
 

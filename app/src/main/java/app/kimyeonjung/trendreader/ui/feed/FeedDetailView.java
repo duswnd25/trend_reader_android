@@ -1,20 +1,33 @@
 package app.kimyeonjung.trendreader.ui.feed;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
 
+import java.lang.reflect.Array;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 import app.kimyeonjung.trendreader.R;
 import app.kimyeonjung.trendreader.core.Const;
@@ -26,6 +39,8 @@ public class FeedDetailView extends AppCompatActivity {
     private FeedItem feedItem;
     private MenuItem bookMarkItem;
     private Realm realm;
+    private List<MenuItem> menuIcons = new LinkedList<>();
+    private int nowColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +49,7 @@ public class FeedDetailView extends AppCompatActivity {
 
         realm = Realm.getInstance(Const.DB.getFeedDBConfig());
         feedItem = getIntent().getParcelableExtra(Const.INTENT.FEED_POST);
+        nowColor = getResources().getColor(R.color.colorPrimary);
 
         initView();
     }
@@ -45,11 +61,36 @@ public class FeedDetailView extends AppCompatActivity {
 
         ((TextView) findViewById(R.id.detail_text)).setText(feedItem.getPostContent());
 
+        // Favicon Image View
         Glide.with(this)
                 .load(feedItem.getFaviconUrl())
+                .asBitmap()
                 .centerCrop()
                 .placeholder(R.mipmap.ic_launcher_round)
-                .into((ImageView) findViewById(R.id.detail_favicon));
+                .into(new BitmapImageViewTarget(findViewById(R.id.detail_favicon)) {
+                    @SuppressWarnings("unchecked")
+                    @Override
+                    public void onResourceReady(Bitmap bitmap, GlideAnimation anim) {
+                        super.onResourceReady(bitmap, anim);
+                        setOffsetListener(bitmap);
+                    }
+                });
+    }
+
+    private void setOffsetListener(Bitmap bitmap) {
+        Palette palette = Palette.from(bitmap).generate();
+        Palette.Swatch vibrantSwatch = palette.getLightVibrantSwatch();
+        ((AppBarLayout) findViewById(R.id.detail_appbar)).addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
+            if (verticalOffset < -200) {
+                nowColor = getResources().getColor(R.color.colorPrimary);
+            } else {
+                nowColor = vibrantSwatch == null ? getResources().getColor(android.R.color.white) : vibrantSwatch.getRgb();
+            }
+            for (MenuItem item : menuIcons) {
+                item.getIcon().mutate();
+                item.getIcon().setColorFilter(nowColor, PorterDuff.Mode.SRC_IN);
+            }
+        });
     }
 
     private void changeBookMarkState() {
@@ -93,14 +134,10 @@ public class FeedDetailView extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.detail_menu, menu);
-        /*
-        색상필터
+
         for (int index = 0; index < menu.size(); index++) {
-            Drawable icon = menu.getItem(index).getIcon();
-            icon.mutate();
-            icon.setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+            menuIcons.add(menu.getItem(index));
         }
-        */
         bookMarkItem = menu.getItem(0);
         return true;
     }
@@ -114,6 +151,7 @@ public class FeedDetailView extends AppCompatActivity {
     private void changeBookMarkIcon() {
         // 북마크 여부에 따라 변경
         bookMarkItem.setIcon(feedItem.isBookMarked() ? R.drawable.ic_bookmark_fill : R.drawable.ic_bookmark);
+        bookMarkItem.getIcon().setColorFilter(nowColor, PorterDuff.Mode.SRC_IN);
     }
 
     @Override
