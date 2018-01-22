@@ -10,7 +10,7 @@ android {
         targetSdkVersion 27
         versionCode 3
         multiDexEnabled true
-        versionName "1.1.1"
+        versionName "1.2.0"
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
