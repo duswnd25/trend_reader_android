@@ -43,9 +43,7 @@
     <!-- FCM -->
     <string name="pref_fcm_quickly_des">바로 받기</string>
     <string name="pref_fcm_quickly">pref_fcm_quickly</string>
-    <string name="pref_fcm_daily_morning_des">아침에 받기</string>
     <string name="pref_fcm_daily_morning">pref_fcm_daily_morning</string>
-    <string name="pref_fcm_daily_evening_des">저녁에 받기</string>
     <string name="pref_fcm_daily_evening">pref_fcm_daily_evening</string>
 
     <string name="fcm_quickly_Channel">channel_feed_quickly</string>
