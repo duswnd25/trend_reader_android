@@ -2,15 +2,18 @@ package app.kimyeonjung.trendreader.ui.setting;
 
 
 import android.app.AlertDialog;
-import android.content.Intent;
+import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import com.muddzdev.styleabletoastlibrary.StyleableToast;
 
 import app.kimyeonjung.trendreader.R;
 import app.kimyeonjung.trendreader.core.Const;
@@ -42,6 +45,23 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     }
 
     private void initClickListener() {
+        findPreference(getString(R.string.pref_donate)).setOnPreferenceClickListener(preference -> {
+            android.content.ClipboardManager clipboard =
+                    (android.content.ClipboardManager) this.getSystemService(Context.CLIPBOARD_SERVICE);
+            android.content.ClipData clip =
+                    android.content.ClipData.newPlainText("Donate To", "카카오뱅크 3333-04-3410553 김연중");
+            clipboard.setPrimaryClip(clip);
+
+            new StyleableToast
+                    .Builder(this)
+                    .textColor(Color.WHITE)
+                    .backgroundColor(getResources().getColor(R.color.colorPrimary))
+                    .iconResLeft(R.drawable.ic_donate_white)
+                    .text(getString(R.string.copy_ok))
+                    .show();
+            return true;
+        });
+
         findPreference(getString(R.string.pref_delete_feed_db)).setOnPreferenceClickListener(preference -> {
             removeData(REMOVE_TYPE.FEED);
             return true;

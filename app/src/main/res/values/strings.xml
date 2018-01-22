@@ -56,6 +56,11 @@
     <string name="pref_request_feature_add">pref_request_feature_add</string>
     <string name="pref_request_feature_add_des">건의</string>
 
+    <!-- DONATE -->
+    <string name="pref_donate">pref_donate</string>
+    <string name="pref_donate_des">후원</string>
+    <string name="copy_ok">복사되었습니다.</string>
+
     <!-- ETC -->
     <string name="pref_remove_confirm">정말 삭제할까요?</string>
     <!-- TITLE -->

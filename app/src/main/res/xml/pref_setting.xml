@@ -59,5 +59,9 @@
             android:icon="@drawable/ic_request_feature"
             android:key="@string/pref_request_feature_add"
             android:title="@string/pref_request_feature_add_des" />
+        <Preference
+            android:icon="@drawable/ic_donate_black"
+            android:key="@string/pref_donate"
+            android:title="@string/pref_donate_des" />
     </app.kimyeonjung.trendreader.core.prefs.CustomPreferenceCategory>
 </PreferenceScreen>
