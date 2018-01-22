@@ -28,7 +28,7 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.ViewHold
     @Override
     public void onBindViewHolder(LibraryAdapter.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         holder.textView.setText(itemList.get(position));
-        holder.textView.setTextColor(Color.WHITE);
+        holder.textView.setTextColor(Color.BLACK);
     }
 
     @Override
