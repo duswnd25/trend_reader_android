@@ -35,6 +35,5 @@
         android:layout_gravity="center_horizontal|bottom"
         android:src="@drawable/ic_arrow_up"
         app:fabSize="auto"
-        app:backgroundTint="@color/colorPrimaryLight"
         app:useCompatPadding="true" />
 </FrameLayout>
