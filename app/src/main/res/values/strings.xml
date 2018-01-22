@@ -52,7 +52,7 @@
 
     <!-- REQUEST-->
     <string name="pref_request_blog_add">pref_request_blog_add</string>
-    <string name="pref_request_blog_add_des">블로그 추가 요청</string>
+    <string name="pref_request_blog_add_des">블로그 추가/삭제 요청</string>
     <string name="pref_request_feature_add">pref_request_feature_add</string>
     <string name="pref_request_feature_add_des">건의</string>
 
