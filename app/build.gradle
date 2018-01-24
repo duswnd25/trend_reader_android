@@ -3,12 +3,14 @@ apply plugin: 'realm-android'
 apply plugin: 'io.fabric'
 
 android {
+    signingConfigs {
+    }
     compileSdkVersion 27
     defaultConfig {
         applicationId "app.kimyeonjung.trendreader"
         minSdkVersion 21
         targetSdkVersion 27
-        versionCode 3
+        versionCode 4
         multiDexEnabled true
         versionName "1.2.0"
         vectorDrawables.useSupportLibrary = true
@@ -19,6 +21,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
     buildToolsVersion '27.0.3'
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
