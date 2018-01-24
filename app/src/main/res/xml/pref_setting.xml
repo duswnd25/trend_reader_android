@@ -1,7 +1,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <app.kimyeonjung.trendreader.core.prefs.CustomPreferenceCategory android:title="@string/pref_layout_category_title">
         <app.kimyeonjung.trendreader.core.prefs.NumberPickerPreference
-            android:defaultValue="2"
+            android:defaultValue="1"
             android:icon="@drawable/ic_grid"
             android:key="@string/pref_feed_col_num"
             android:title="@string/pref_feed_col_num_des" />
