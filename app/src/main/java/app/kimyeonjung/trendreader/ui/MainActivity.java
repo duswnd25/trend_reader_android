@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import app.kimyeonjung.trendreader.R;
+import app.kimyeonjung.trendreader.core.fcm.FCMRegister;
 import app.kimyeonjung.trendreader.core.tab.MainTabAdapter;
 import app.kimyeonjung.trendreader.ui.feed.BookMarkView;
 import app.kimyeonjung.trendreader.ui.feed.FeedView;
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
         FirebaseAnalytics.getInstance(this);
-
+        new FCMRegister().refreshSubscribe(this);
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = findViewById(R.id.main_toolbar);

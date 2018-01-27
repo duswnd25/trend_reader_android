@@ -10,9 +10,9 @@ android {
         applicationId "app.kimyeonjung.trendreader"
         minSdkVersion 21
         targetSdkVersion 27
-        versionCode 4
+        versionCode 6
         multiDexEnabled true
-        versionName "1.2.0"
+        versionName "1.2.2"
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {

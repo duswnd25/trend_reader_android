@@ -2,6 +2,7 @@ package app.kimyeonjung.trendreader.data.feed;
 
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -12,6 +13,7 @@ import org.json.JSONObject;
 
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.LinkedList;
 
@@ -68,7 +70,7 @@ public class FeedManager {
                     FeedItem feedItem = new FeedItem();
                     //BlogI Info
                     feedItem.setBlogName(tempJson.getString("blog_name"));
-                    feedItem.setFaviconUrl(tempJson.getString("favicon_url"));
+                    feedItem.setFaviconUrl(tempJson.getString("profile_url"));
                     feedItem.setBlogUrl(tempJson.getString("blog_url"));
 
                     // Content
@@ -76,7 +78,6 @@ public class FeedManager {
                     feedItem.setPostContent(tempJson.getString("post_content").trim());
                     feedItem.setPostUrl(tempJson.getString("post_url"));
                     feedItem.setUpdateAt(stringToDate(tempJson.getString("update_at")));
-
                     feedList.add(feedItem);
                 }
             } catch (Exception e) {
